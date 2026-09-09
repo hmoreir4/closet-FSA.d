@@ -1,652 +1,512 @@
-/* ========================================
-   PRODUTOS
-======================================== */
+:root {
+    --brown: #4B3E26;
+    --yellow: #F5C820;
+    --navy: #0F142E;
+    --purple: #6E637F;
+    --gray: #AFAEAB;
+    --white: #FFFFFF;
+}
 
-const products = [
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-    {
-        id: "camiseta-azul",
-        name: "Camiseta Azul",
-        description: "Camiseta oficial da Atlética",
-        image: "assets/camiseta-azul.jpg",
-        overlay: "assets/camiseta-azul.png"
-    },
+html {
+    scroll-behavior: smooth;
+}
 
-    {
-        id: "camiseta-branca",
-        name: "Camiseta Branca",
-        description: "Camiseta oficial da Atlética",
-        image: "assets/camiseta-branca.jpg",
-        overlay: "assets/camiseta-branca.png"
-    },
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--white);
+    color: var(--navy);
+}
 
-    {
-        id: "jaqueta-varsity",
-        name: "Jaqueta Varsity",
-        description: "Jaqueta oficial da Atlética",
-        image: "assets/jaqueta-varsity.jpg",
-        overlay: "assets/jaqueta-varsity.png"
-    },
+img {
+    max-width: 100%;
+    display: block;
+}
 
-    {
-        id: "moletom-amarelo",
-        name: "Moletom Amarelo",
-        description: "Moletom oficial da Atlética",
-        image: "assets/moletom-amarelo.jpg",
-        overlay: "assets/moletom-amarelo.png"
-    },
-
-    {
-        id: "moletom-branco",
-        name: "Moletom Branco",
-        description: "Moletom oficial da Atlética",
-        image: "assets/moletom-branco.jpg",
-        overlay: "assets/moletom-branco.png"
-    },
-
-    {
-        id: "moletom-preto",
-        name: "Moletom Preto",
-        description: "Moletom oficial da Atlética",
-        image: "assets/moletom-preto.jpg",
-        overlay: "assets/moletom-preto.png"
-    }
-
-];
-
-
-/* ========================================
-   ELEMENTOS
-======================================== */
-
-const photoInput =
-    document.getElementById("photoInput");
-
-const userPhoto =
-    document.getElementById("userPhoto");
-
-const clothingOverlay =
-    document.getElementById("clothingOverlay");
-
-const emptyMessage =
-    document.getElementById("emptyMessage");
-
-const productButtons =
-    document.getElementById("productButtons");
-
-const productsGrid =
-    document.getElementById("productsGrid");
-
-const selectedProduct =
-    document.getElementById("selectedProduct");
-
-const smallerBtn =
-    document.getElementById("smallerBtn");
-
-const biggerBtn =
-    document.getElementById("biggerBtn");
-
-const rotateLeftBtn =
-    document.getElementById("rotateLeftBtn");
-
-const rotateRightBtn =
-    document.getElementById("rotateRightBtn");
-
-const resetBtn =
-    document.getElementById("resetBtn");
-
-const buyButton =
-    document.getElementById("buyButton");
-
-
-/* ========================================
-   VARIÁVEIS DO PROVADOR
-======================================== */
-
-let currentProduct = null;
-
-let scale = 1;
-
-let rotation = 0;
-
-let positionX = 0;
-
-let positionY = 0;
-
-let dragging = false;
-
-let startX = 0;
-
-let startY = 0;
-
-
-/* ========================================
-   CRIAR BOTÕES DO CLOSET
-======================================== */
-
-function createProductButtons() {
-
-    productButtons.innerHTML = "";
-
-    products.forEach(product => {
-
-        const button =
-            document.createElement("button");
-
-        button.className =
-            "product-button";
-
-        button.textContent =
-            product.name;
-
-        button.dataset.id =
-            product.id;
-
-        button.addEventListener(
-            "click",
-            () => selectProduct(product.id)
-        );
-
-        productButtons.appendChild(button);
-
-    });
-
+a {
+    text-decoration: none;
+    color: inherit;
 }
 
 
-/* ========================================
-   CRIAR CARDS DE ROUPAS
-======================================== */
+/* =========================
+   HEADER
+========================= */
 
-function createProductCards() {
+.header {
+    width: 100%;
+    min-height: 80px;
+    background: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 6%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-    productsGrid.innerHTML = "";
+.logo-area img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+}
 
-    products.forEach(product => {
+.header nav {
+    display: flex;
+    gap: 30px;
+}
 
-        const card =
-            document.createElement("article");
+.header nav a {
+    color: var(--white);
+    font-weight: bold;
+    font-size: 15px;
+    transition: 0.3s;
+}
 
-        card.className =
-            "product-card";
-
-        card.innerHTML = `
-
-            <img
-                src="${product.image}"
-                alt="${product.name}"
-                class="product-image"
-            >
-
-            <div class="product-info">
-
-                <h3>
-                    ${product.name}
-                </h3>
-
-                <p>
-                    ${product.description}
-                </p>
-
-                <button
-                    class="select-product"
-                    data-id="${product.id}"
-                >
-                    EXPERIMENTAR
-                </button>
-
-            </div>
-
-        `;
-
-        const button =
-            card.querySelector(".select-product");
-
-        button.addEventListener(
-            "click",
-            () => {
-
-                selectProduct(product.id);
-
-                document
-                    .getElementById("closet")
-                    .scrollIntoView({
-                        behavior: "smooth"
-                    });
-
-            }
-        );
-
-        productsGrid.appendChild(card);
-
-    });
-
+.header nav a:hover {
+    color: var(--yellow);
 }
 
 
-/* ========================================
-   SELECIONAR ROUPA
-======================================== */
+/* =========================
+   HERO
+========================= */
 
-function selectProduct(productId) {
-
-    const product =
-        products.find(
-            item => item.id === productId
+.hero {
+    min-height: 650px;
+    background:
+        linear-gradient(
+            rgba(15, 20, 46, 0.92),
+            rgba(15, 20, 46, 0.92)
         );
+    display: flex;
+    align-items: center;
+    padding: 80px 8%;
+}
 
-    if (!product) {
-        return;
-    }
+.hero-text {
+    max-width: 700px;
+}
 
-    currentProduct = product;
+.tag {
+    display: inline-block;
+    color: var(--yellow);
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
 
-    scale = 1;
+.hero h1 {
+    color: var(--white);
+    font-size: clamp(45px, 7vw, 90px);
+    line-height: 0.95;
+    margin-bottom: 30px;
+}
 
-    rotation = 0;
+.hero p {
+    color: var(--gray);
+    font-size: 20px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-bottom: 35px;
+}
 
-    positionX = 0;
+.btn {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--navy);
+    padding: 17px 30px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
 
-    positionY = 0;
-
-
-    /*
-       IMPORTANTE:
-       O PNG é o arquivo usado
-       para a roupa flutuante.
-    */
-
-    clothingOverlay.src =
-        product.overlay;
-
-
-    clothingOverlay.style.display =
-        "block";
-
-
-    selectedProduct.textContent =
-        product.name;
-
-
-    /*
-       Centraliza a roupa.
-    */
-
-    centerClothing();
-
-
-    /*
-       Marca botão ativo.
-    */
-
-    document
-        .querySelectorAll(".product-button")
-        .forEach(button => {
-
-            button.classList.remove(
-                "active"
-            );
-
-            if (
-                button.dataset.id ===
-                product.id
-            ) {
-
-                button.classList.add(
-                    "active"
-                );
-
-            }
-
-        });
-
-
-    /*
-       Se o PNG não existir,
-       mostra uma mensagem.
-    */
-
-    clothingOverlay.onerror =
-        function () {
-
-            alert(
-                "Não foi possível carregar a imagem PNG desta roupa. Verifique se o arquivo existe dentro da pasta assets."
-            );
-
-        };
-
+.btn:hover {
+    transform: translateY(-3px);
 }
 
 
-/* ========================================
-   CENTRALIZAR ROUPA
-======================================== */
+/* =========================
+   SECTIONS
+========================= */
 
-function centerClothing() {
+section {
+    padding: 100px 7%;
+}
 
-    const canvas =
-        document.getElementById(
-            "photoCanvas"
-        );
+.section-title span {
+    color: var(--brown);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
 
-    positionX =
-        canvas.clientWidth / 2;
+.section-title h2 {
+    font-size: 48px;
+    margin-top: 10px;
+}
 
-    positionY =
-        canvas.clientHeight / 2;
-
-    updateClothing();
-
+.center {
+    text-align: center;
 }
 
 
-/* ========================================
-   ATUALIZAR ROUPA
-======================================== */
+/* =========================
+   HOW
+========================= */
 
-function updateClothing() {
+.how {
+    background: #f4f4f2;
+}
 
-    clothingOverlay.style.transform =
+.steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 50px;
+}
 
-        `translate(
-            ${positionX - 125}px,
-            ${positionY - 125}px
-        )
-        scale(${scale})
-        rotate(${rotation}deg)`;
+.step {
+    background: var(--white);
+    padding: 35px;
+    border-radius: 15px;
+    border: 2px solid #eee;
+}
 
+.step strong {
+    color: var(--yellow);
+    background: var(--navy);
+    padding: 8px 12px;
+    border-radius: 6px;
+}
+
+.step h3 {
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.step p {
+    color: #666;
+    line-height: 1.6;
 }
 
 
-/* ========================================
-   UPLOAD DA FOTO
-======================================== */
+/* =========================
+   CLOSET
+========================= */
 
-photoInput.addEventListener(
-    "change",
-    function (event) {
+.closet {
+    background: var(--white);
+}
 
-        const file =
-            event.target.files[0];
+.closet-container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 50px;
+    margin-top: 60px;
+}
 
-        if (!file) {
-            return;
-        }
+.control-box {
+    margin-bottom: 30px;
+}
 
-        if (!file.type.startsWith("image/")) {
+.control-box h3 {
+    margin-bottom: 10px;
+    font-size: 22px;
+}
 
-            alert(
-                "Escolha uma imagem válida."
-            );
+.control-box p {
+    color: #666;
+    margin-bottom: 15px;
+}
 
-            return;
-        }
+#photoInput {
+    display: none;
+}
+
+.upload-btn {
+    display: inline-block;
+    cursor: pointer;
+    background: var(--navy);
+    color: white;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.products {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.product-btn {
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.product-btn:hover {
+    border-color: var(--yellow);
+    transform: translateY(-2px);
+}
+
+.product-btn img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+}
+
+.product-btn span {
+    display: block;
+    padding: 10px;
+    font-weight: bold;
+    color: var(--navy);
+}
+
+.adjust-buttons {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0;
+}
+
+.adjust-buttons button {
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 8px;
+    background: var(--navy);
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.reset-btn {
+    border: none;
+    background: var(--gray);
+    color: var(--navy);
+    padding: 12px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
 
-        const reader =
-            new FileReader();
+/* =========================
+   PROVADOR
+========================= */
+
+.tryon {
+    background: #f3f3f1;
+    padding: 30px;
+    border-radius: 20px;
+}
+
+.tryon > h3 {
+    margin-bottom: 20px;
+}
+
+.canvas {
+    position: relative;
+    width: 100%;
+    min-height: 500px;
+    background: #ddd;
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-message {
+    color: #666;
+    text-align: center;
+}
+
+.user-photo {
+    position: absolute;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: none;
+}
+
+.clothing {
+    position: absolute;
+    width: 260px;
+    cursor: grab;
+    display: none;
+    user-select: none;
+    touch-action: none;
+    transform-origin: center;
+}
+
+.clothing:active {
+    cursor: grabbing;
+}
+
+.selected-info {
+    display: flex;
+    gap: 10px;
+    margin: 15px 0;
+    color: #777;
+}
+
+.buy-btn {
+    width: 100%;
+    padding: 17px;
+    border: none;
+    border-radius: 8px;
+    background: var(--yellow);
+    color: var(--navy);
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+}
 
 
-        reader.onload =
-            function (e) {
+/* =========================
+   ROUPAS
+========================= */
 
-                userPhoto.src =
-                    e.target.result;
+.clothing-section {
+    background: var(--navy);
+}
 
-                userPhoto.style.display =
-                    "block";
+.clothing-section .section-title span {
+    color: var(--yellow);
+}
 
-                emptyMessage.style.display =
-                    "none";
+.clothing-section h2 {
+    color: white;
+}
 
-            };
+.clothing-section .section-title p {
+    color: var(--gray);
+    margin-top: 15px;
+}
+
+.clothing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.clothing-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.clothing-card img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+}
+
+.clothing-card h3 {
+    padding: 20px 20px 10px;
+}
+
+.clothing-card button {
+    margin: 0 20px 20px;
+    width: calc(100% - 40px);
+    padding: 14px;
+    border: none;
+    background: var(--yellow);
+    color: var(--navy);
+    font-weight: bold;
+    border-radius: 7px;
+    cursor: pointer;
+}
 
 
-        reader.readAsDataURL(file);
+/* =========================
+   FOOTER
+========================= */
 
+footer {
+    background: #090d20;
+    color: var(--gray);
+    padding: 50px 7%;
+    text-align: center;
+}
+
+footer img {
+    width: 80px;
+    margin: 0 auto 20px;
+}
+
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 900px) {
+
+    .header nav {
+        gap: 12px;
     }
-);
 
-
-/* ========================================
-   AUMENTAR
-======================================== */
-
-biggerBtn.addEventListener(
-    "click",
-    function () {
-
-        scale += 0.1;
-
-        if (scale > 3) {
-            scale = 3;
-        }
-
-        updateClothing();
-
+    .header nav a {
+        font-size: 12px;
     }
-);
 
-
-/* ========================================
-   DIMINUIR
-======================================== */
-
-smallerBtn.addEventListener(
-    "click",
-    function () {
-
-        scale -= 0.1;
-
-        if (scale < 0.3) {
-            scale = 0.3;
-        }
-
-        updateClothing();
-
+    .steps {
+        grid-template-columns: 1fr;
     }
-);
 
-
-/* ========================================
-   GIRAR ESQUERDA
-======================================== */
-
-rotateLeftBtn.addEventListener(
-    "click",
-    function () {
-
-        rotation -= 5;
-
-        updateClothing();
-
+    .closet-container {
+        grid-template-columns: 1fr;
     }
-);
 
-
-/* ========================================
-   GIRAR DIREITA
-======================================== */
-
-rotateRightBtn.addEventListener(
-    "click",
-    function () {
-
-        rotation += 5;
-
-        updateClothing();
-
+    .clothing-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
-);
 
+}
 
-/* ========================================
-   RESET
-======================================== */
+@media (max-width: 600px) {
 
-resetBtn.addEventListener(
-    "click",
-    function () {
-
-        scale = 1;
-
-        rotation = 0;
-
-        centerClothing();
-
+    .header {
+        flex-direction: column;
+        gap: 10px;
     }
-);
 
-
-/* ========================================
-   ARRASTAR ROUPA - MOUSE
-======================================== */
-
-clothingOverlay.addEventListener(
-    "mousedown",
-    function (event) {
-
-        dragging = true;
-
-        startX =
-            event.clientX - positionX;
-
-        startY =
-            event.clientY - positionY;
-
-        clothingOverlay.style.cursor =
-            "grabbing";
-
+    .hero {
+        min-height: 550px;
+        padding: 60px 7%;
     }
-);
 
-
-document.addEventListener(
-    "mousemove",
-    function (event) {
-
-        if (!dragging) {
-            return;
-        }
-
-        positionX =
-            event.clientX - startX;
-
-        positionY =
-            event.clientY - startY;
-
-        updateClothing();
-
+    .hero h1 {
+        font-size: 48px;
     }
-);
 
-
-document.addEventListener(
-    "mouseup",
-    function () {
-
-        dragging = false;
-
-        clothingOverlay.style.cursor =
-            "grab";
-
+    .section-title h2 {
+        font-size: 36px;
     }
-);
 
-
-/* ========================================
-   ARRASTAR ROUPA - CELULAR
-======================================== */
-
-clothingOverlay.addEventListener(
-    "touchstart",
-    function (event) {
-
-        const touch =
-            event.touches[0];
-
-        dragging = true;
-
-        startX =
-            touch.clientX - positionX;
-
-        startY =
-            touch.clientY - positionY;
-
-    },
-    {
-        passive: true
+    .products {
+        grid-template-columns: 1fr 1fr;
     }
-);
 
-
-document.addEventListener(
-    "touchmove",
-    function (event) {
-
-        if (!dragging) {
-            return;
-        }
-
-        const touch =
-            event.touches[0];
-
-        positionX =
-            touch.clientX - startX;
-
-        positionY =
-            touch.clientY - startY;
-
-        updateClothing();
-
-    },
-    {
-        passive: true
+    .clothing-grid {
+        grid-template-columns: 1fr;
     }
-);
 
-
-document.addEventListener(
-    "touchend",
-    function () {
-
-        dragging = false;
-
+    .canvas {
+        min-height: 400px;
     }
-);
 
-
-/* ========================================
-   BOTÃO DE COMPRA
-======================================== */
-
-buyButton.addEventListener(
-    "click",
-    function () {
-
-        if (!currentProduct) {
-
-            alert(
-                "Escolha uma roupa primeiro."
-            );
-
-            return;
-
-        }
-
-
-        alert(
-            `Você escolheu: ${currentProduct.name}\n\nAqui podemos colocar o link para compra ou pedido da Atlética.`
-        );
-
-    }
-);
-
-
-/* ========================================
-   INICIALIZAÇÃO
-======================================== */
-
-createProductButtons();
-
-createProductCards();
+}
