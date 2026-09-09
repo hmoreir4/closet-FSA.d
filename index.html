@@ -1,66 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Closet da Atlética</title>
+    <title>Closet da Atlética FSA</title>
 
-    <meta
-        name="description"
-        content="Monte seu look com as roupas oficiais da Atlética."
-    >
-
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
-    <!-- =========================
-         HEADER
-    ========================== -->
-
+    <!-- CABEÇALHO -->
     <header class="header">
 
-        <div class="header-container">
-
-            <a href="#inicio" class="logo-area">
-                <img
-                    src="assets/logo.png"
-                    alt="Logo da Atlética"
-                    class="logo"
-                >
-            </a>
-
-            <nav class="nav">
-                <a href="#inicio">Início</a>
-                <a href="#como-funciona">Como funciona</a>
-                <a href="#closet">Meu look</a>
-                <a href="#roupas">Roupas</a>
-            </nav>
-
+        <div class="logo-area">
+            <img src="./assets/logo.png" alt="Logo da Atlética FSA">
         </div>
+
+        <nav>
+            <a href="#inicio">Início</a>
+            <a href="#como-funciona">Como funciona</a>
+            <a href="#closet">Meu Look</a>
+            <a href="#roupas">Roupas</a>
+        </nav>
 
     </header>
 
 
-    <!-- =========================
-         HERO
-    ========================== -->
-
+    <!-- INÍCIO -->
     <main>
 
-        <section id="inicio" class="hero">
+        <section class="hero" id="inicio">
 
-            <div class="hero-content">
+            <div class="hero-text">
 
-                <span class="tag">
-                    CLOSET OFICIAL
-                </span>
+                <span class="tag">CLOSET OFICIAL</span>
 
                 <h1>
                     MONTE SEU<br>
-                    <strong>LOOK DA ATLÉTICA.</strong>
+                    LOOK DA ATLÉTICA.
                 </h1>
 
                 <p>
@@ -68,84 +49,50 @@
                     e veja como ficaria antes de comprar.
                 </p>
 
-                <a href="#closet" class="button">
+                <a href="#closet" class="btn">
                     MONTAR MEU LOOK
                 </a>
 
             </div>
 
-            <div class="hero-decoration">
-                <div class="circle"></div>
-                <div class="yellow-shape"></div>
-            </div>
-
         </section>
 
 
-        <!-- =========================
-             COMO FUNCIONA
-        ========================== -->
-
-        <section id="como-funciona" class="how-section">
+        <!-- COMO FUNCIONA -->
+        <section class="how" id="como-funciona">
 
             <div class="section-title">
-
                 <span>É MUITO FÁCIL</span>
-
-                <h2>
-                    MONTE SEU LOOK
-                </h2>
-
+                <h2>MONTE SEU LOOK.</h2>
             </div>
-
 
             <div class="steps">
 
                 <div class="step">
-
-                    <div class="step-number">01</div>
-
-                    <h3>
-                        TIRE SUA FOTO
-                    </h3>
-
+                    <strong>01</strong>
+                    <h3>TIRE SUA FOTO</h3>
                     <p>
                         Tire uma foto da parte de baixo do seu corpo,
                         mostrando sua calça, tênis e acessórios.
                     </p>
-
                 </div>
 
-
                 <div class="step">
-
-                    <div class="step-number">02</div>
-
-                    <h3>
-                        ESCOLHA A ROUPA
-                    </h3>
-
+                    <strong>02</strong>
+                    <h3>ESCOLHA A ROUPA</h3>
                     <p>
                         Escolha uma das peças oficiais disponíveis
                         no nosso closet.
                     </p>
-
                 </div>
 
-
                 <div class="step">
-
-                    <div class="step-number">03</div>
-
-                    <h3>
-                        MONTE SEU LOOK
-                    </h3>
-
+                    <strong>03</strong>
+                    <h3>MONTE SEU LOOK</h3>
                     <p>
                         Arraste a roupa sobre sua foto e ajuste
                         tamanho e posição.
                     </p>
-
                 </div>
 
             </div>
@@ -153,44 +100,28 @@
         </section>
 
 
-        <!-- =========================
-             CLOSET / PROVADOR
-        ========================== -->
+        <!-- CLOSET -->
+        <section class="closet" id="closet">
 
-        <section id="closet" class="closet-section">
-
-            <div class="section-title">
-
+            <div class="section-title center">
                 <span>SEU PROVADOR DIGITAL</span>
-
-                <h2>
-                    MEU LOOK
-                </h2>
-
+                <h2>MEU LOOK</h2>
             </div>
-
 
             <div class="closet-container">
 
-
-                <!-- PAINEL DE CONTROLE -->
-
-                <aside class="controls">
+                <!-- CONTROLES -->
+                <div class="controls">
 
                     <div class="control-box">
 
-                        <h3>
-                            1. SUA FOTO
-                        </h3>
+                        <h3>1. SUA FOTO</h3>
 
                         <p>
                             Escolha uma foto para começar.
                         </p>
 
-                        <label
-                            for="photoInput"
-                            class="upload-button"
-                        >
+                        <label for="photoInput" class="upload-btn">
                             ESCOLHER FOTO
                         </label>
 
@@ -198,7 +129,6 @@
                             type="file"
                             id="photoInput"
                             accept="image/*"
-                            hidden
                         >
 
                     </div>
@@ -206,16 +136,80 @@
 
                     <div class="control-box">
 
-                        <h3>
-                            2. ESCOLHA UMA PEÇA
-                        </h3>
+                        <h3>2. ESCOLHA UMA PEÇA</h3>
 
-                        <div
-                            class="product-buttons"
-                            id="productButtons"
-                        >
+                        <div class="products">
 
-                            <!-- Os produtos serão criados pelo JavaScript -->
+                            <button
+                                class="product-btn"
+                                data-product="camiseta-azul"
+                            >
+                                <img
+                                    src="./assets/camiseta-azul.jpg"
+                                    alt="Camiseta Azul"
+                                >
+                                <span>Camiseta Azul</span>
+                            </button>
+
+
+                            <button
+                                class="product-btn"
+                                data-product="camiseta-branca"
+                            >
+                                <img
+                                    src="./assets/camiseta-branca.jpg"
+                                    alt="Camiseta Branca"
+                                >
+                                <span>Camiseta Branca</span>
+                            </button>
+
+
+                            <button
+                                class="product-btn"
+                                data-product="moletom-amarelo"
+                            >
+                                <img
+                                    src="./assets/moletom-amarelo.jpg"
+                                    alt="Moletom Amarelo"
+                                >
+                                <span>Moletom Amarelo</span>
+                            </button>
+
+
+                            <button
+                                class="product-btn"
+                                data-product="moletom-branco"
+                            >
+                                <img
+                                    src="./assets/moletom-branco.jpg"
+                                    alt="Moletom Branco"
+                                >
+                                <span>Moletom Branco</span>
+                            </button>
+
+
+                            <button
+                                class="product-btn"
+                                data-product="moletom-preto"
+                            >
+                                <img
+                                    src="./assets/moletom-preto.jpg"
+                                    alt="Moletom Preto"
+                                >
+                                <span>Moletom Preto</span>
+                            </button>
+
+
+                            <button
+                                class="product-btn"
+                                data-product="jaqueta-varsity"
+                            >
+                                <img
+                                    src="./assets/jaqueta-varsity.jpg"
+                                    alt="Jaqueta Varsity"
+                                >
+                                <span>Jaqueta Varsity</span>
+                            </button>
 
                         </div>
 
@@ -224,67 +218,56 @@
 
                     <div class="control-box">
 
-                        <h3>
-                            3. AJUSTE O LOOK
-                        </h3>
+                        <h3>3. AJUSTE O LOOK</h3>
 
                         <div class="adjust-buttons">
 
-                            <button id="smallerBtn">
+                            <button id="decrease">
                                 −
                             </button>
 
-                            <button id="biggerBtn">
+                            <button id="increase">
                                 +
                             </button>
 
-                            <button id="rotateLeftBtn">
-                                ↶
+                            <button id="rotateLeft">
+                                ↺
                             </button>
 
-                            <button id="rotateRightBtn">
-                                ↷
+                            <button id="rotateRight">
+                                ↻
                             </button>
 
                         </div>
 
                         <button
-                            id="resetBtn"
-                            class="reset-button"
+                            id="reset"
+                            class="reset-btn"
                         >
                             RESETAR ROUPA
                         </button>
 
                     </div>
 
-                </aside>
+                </div>
 
 
-                <!-- ÁREA DO PROVADOR -->
+                <!-- PROVADOR -->
+                <div class="tryon">
 
-                <div class="tryon-area">
+                    <h3>SEU LOOK APARECERÁ AQUI</h3>
 
                     <div
-                        id="photoCanvas"
-                        class="photo-canvas"
+                        id="canvas"
+                        class="canvas"
                     >
 
-                        <div class="empty-message" id="emptyMessage">
-
-                            <div class="camera-icon">
-                                +
-                            </div>
-
-                            <h3>
-                                SEU LOOK APARECERÁ AQUI
-                            </h3>
-
-                            <p>
-                                Envie uma foto para começar.
-                            </p>
-
+                        <div
+                            id="emptyMessage"
+                            class="empty-message"
+                        >
+                            Envie uma foto para começar.
                         </div>
-
 
                         <img
                             id="userPhoto"
@@ -292,31 +275,34 @@
                             alt="Sua foto"
                         >
 
-
                         <img
-                            id="clothingOverlay"
-                            class="clothing-overlay"
+                            id="clothing"
+                            class="clothing"
                             alt="Roupa selecionada"
-                            draggable="false"
                         >
 
                     </div>
 
+                    <div class="selected-info">
 
-                    <div class="tryon-info">
+                        <span>
+                            Sua foto
+                        </span>
 
-                        <p id="selectedProduct">
-                            Nenhuma peça selecionada
-                        </p>
+                        <span>•</span>
 
-                        <button
-                            id="buyButton"
-                            class="buy-button"
-                        >
-                            QUERO ESSE LOOK
-                        </button>
+                        <span>
+                            Roupa selecionada
+                        </span>
 
                     </div>
+
+                    <button
+                        id="buyButton"
+                        class="buy-btn"
+                    >
+                        QUERO ESSE LOOK
+                    </button>
 
                 </div>
 
@@ -325,58 +311,134 @@
         </section>
 
 
-        <!-- =========================
-             ROUPAS
-        ========================== -->
+        <!-- ROUPAS -->
+        <section
+            class="clothing-section"
+            id="roupas"
+        >
 
-        <section id="roupas" class="products-section">
-
-            <div class="section-title">
+            <div class="section-title center">
 
                 <span>COLEÇÃO OFICIAL</span>
 
                 <h2>
-                    ESCOLHA SUA PEÇA
+                    ESCOLHA SUA PEÇA.
                 </h2>
+
+                <p>
+                    Já sabe qual é o seu?
+                </p>
 
             </div>
 
+            <div class="clothing-grid">
 
-            <div
-                class="products-grid"
-                id="productsGrid"
-            >
+                <div class="clothing-card">
 
-                <!-- Produtos criados automaticamente -->
+                    <img
+                        src="./assets/camiseta-azul.jpg"
+                        alt="Camiseta Azul"
+                    >
 
-            </div>
+                    <h3>Camiseta Azul</h3>
 
-        </section>
+                    <button
+                        onclick="selectProduct('camiseta-azul')"
+                    >
+                        MONTAR LOOK
+                    </button>
+
+                </div>
 
 
-        <!-- =========================
-             CTA
-        ========================== -->
+                <div class="clothing-card">
 
-        <section class="final-section">
+                    <img
+                        src="./assets/camiseta-branca.jpg"
+                        alt="Camiseta Branca"
+                    >
 
-            <div>
+                    <h3>Camiseta Branca</h3>
 
-                <span>
-                    JÁ SABE QUAL É O SEU?
-                </span>
+                    <button
+                        onclick="selectProduct('camiseta-branca')"
+                    >
+                        MONTAR LOOK
+                    </button>
 
-                <h2>
-                    MONTE.
-                    <br>
-                    EXPERIMENTE.
-                    <br>
-                    <strong>VISTA A ATLÉTICA.</strong>
-                </h2>
+                </div>
 
-                <a href="#closet" class="button">
-                    CRIAR MEU LOOK
-                </a>
+
+                <div class="clothing-card">
+
+                    <img
+                        src="./assets/moletom-amarelo.jpg"
+                        alt="Moletom Amarelo"
+                    >
+
+                    <h3>Moletom Amarelo</h3>
+
+                    <button
+                        onclick="selectProduct('moletom-amarelo')"
+                    >
+                        MONTAR LOOK
+                    </button>
+
+                </div>
+
+
+                <div class="clothing-card">
+
+                    <img
+                        src="./assets/moletom-branco.jpg"
+                        alt="Moletom Branco"
+                    >
+
+                    <h3>Moletom Branco</h3>
+
+                    <button
+                        onclick="selectProduct('moletom-branco')"
+                    >
+                        MONTAR LOOK
+                    </button>
+
+                </div>
+
+
+                <div class="clothing-card">
+
+                    <img
+                        src="./assets/moletom-preto.jpg"
+                        alt="Moletom Preto"
+                    >
+
+                    <h3>Moletom Preto</h3>
+
+                    <button
+                        onclick="selectProduct('moletom-preto')"
+                    >
+                        MONTAR LOOK
+                    </button>
+
+                </div>
+
+
+                <div class="clothing-card">
+
+                    <img
+                        src="./assets/jaqueta-varsity.jpg"
+                        alt="Jaqueta Varsity"
+                    >
+
+                    <h3>Jaqueta Varsity</h3>
+
+                    <button
+                        onclick="selectProduct('jaqueta-varsity')"
+                    >
+                        MONTAR LOOK
+                    </button>
+
+                </div>
 
             </div>
 
@@ -385,29 +447,23 @@
     </main>
 
 
-    <!-- =========================
-         FOOTER
-    ========================== -->
-
+    <!-- RODAPÉ -->
     <footer>
 
         <img
-            src="assets/logo.png"
-            alt="Logo da Atlética"
+            src="./assets/logo.png"
+            alt="Atlética FSA"
         >
 
         <p>
-            Closet oficial da Atlética
+            © 2026 Associação Atlética Acadêmica FSA
         </p>
-
-        <small>
-            © 2026 — Todos os direitos reservados.
-        </small>
 
     </footer>
 
 
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
 
 </body>
+
 </html>
