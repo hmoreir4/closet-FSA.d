@@ -1,682 +1,991 @@
-/* =========================================
-   ELEMENTOS
-========================================= */
+/* ========================================
+   RESET
+======================================== */
 
-const photoInput = document.getElementById("photoInput");
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-const uploadArea = document.getElementById("uploadArea");
+html {
+    scroll-behavior: smooth;
+}
 
-const uploadContent = document.getElementById("uploadContent");
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0F142E;
+    color: #ffffff;
+    overflow-x: hidden;
+}
 
-const userPhoto = document.getElementById("userPhoto");
+button,
+input {
+    font-family: inherit;
+}
 
-const changePhoto = document.getElementById("changePhoto");
-
-const tryArea = document.getElementById("tryArea");
-
-const emptyTry = document.getElementById("emptyTry");
-
-const clothingOverlay =
-    document.getElementById("clothingOverlay");
-
-const controls =
-    document.getElementById("controls");
-
-const clothingItems =
-    document.querySelectorAll(".clothing-item");
-
-const selectedName =
-    document.getElementById("selectedName");
-
-const buyButton =
-    document.getElementById("buyButton");
+a {
+    color: inherit;
+    text-decoration: none;
+}
 
 
-/* =========================================
-   ESTADO
-========================================= */
+/* ========================================
+   CORES
+======================================== */
 
-let selectedProduct = null;
+:root {
 
-let scale = 1;
-
-let rotation = 0;
-
-let positionX = 50;
-
-let positionY = 45;
-
-let isDragging = false;
-
-let startX = 0;
-
-let startY = 0;
-
-let startPositionX = 50;
-
-let startPositionY = 45;
-
-
-/* =========================================
-   UPLOAD DA FOTO
-========================================= */
-
-photoInput.addEventListener("change", function () {
-
-    const file = this.files[0];
-
-    if (!file) {
-        return;
-    }
-
-    if (!file.type.startsWith("image/")) {
-
-        alert("Escolha uma imagem válida.");
-
-        return;
-    }
-
-    const reader = new FileReader();
-
-    reader.onload = function (event) {
-
-        userPhoto.src = event.target.result;
-
-        userPhoto.style.display = "block";
-
-        uploadContent.style.display = "none";
-
-        changePhoto.style.display = "block";
-
-        tryArea.style.background = "transparent";
-
-        tryArea.classList.add("has-photo");
-
-        updateTryBackground();
-
-    };
-
-    reader.readAsDataURL(file);
-
-});
-
-
-/* =========================================
-   TROCAR FOTO
-========================================= */
-
-changePhoto.addEventListener("click", function () {
-
-    photoInput.click();
-
-});
-
-
-/* =========================================
-   CRIA FUNDO DO PROVADOR
-========================================= */
-
-function updateTryBackground() {
-
-    let oldBackground =
-        document.querySelector(".try-background");
-
-    if (oldBackground) {
-
-        oldBackground.remove();
-
-    }
-
-    if (!userPhoto.src) {
-
-        return;
-
-    }
-
-    const background =
-        document.createElement("img");
-
-    background.src = userPhoto.src;
-
-    background.className =
-        "try-background";
-
-    tryArea.prepend(background);
+    --navy: #0F142E;
+    --yellow: #F5C820;
+    --brown: #4B3E26;
+    --purple: #6E637F;
+    --gray: #AFAEAB;
+    --white: #ffffff;
 
 }
 
 
-/* =========================================
-   ESCOLHER ROUPA
-========================================= */
+/* ========================================
+   HEADER
+======================================== */
 
-clothingItems.forEach(function (item) {
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
-    item.addEventListener("click", function () {
+    background: rgba(15, 20, 46, 0.95);
 
-        clothingItems.forEach(function (button) {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
 
-            button.classList.remove("active");
+    backdrop-filter: blur(10px);
+}
 
-        });
+.header-container {
 
-        item.classList.add("active");
+    max-width: 1200px;
+    margin: auto;
 
-        const name =
-            item.dataset.name;
+    min-height: 80px;
 
-        const image =
-            item.dataset.image;
+    padding: 15px 25px;
 
-        const overlay =
-            item.dataset.overlay;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-        selectedProduct = {
+    gap: 30px;
+}
 
-            name: name,
+.logo {
+    width: 65px;
+    height: 65px;
 
-            image: image,
+    object-fit: contain;
+}
 
-            overlay: overlay
+.nav {
+    display: flex;
+    gap: 28px;
+}
 
-        };
+.nav a {
 
-        selectedName.textContent = name;
+    font-size: 13px;
+    font-weight: bold;
 
-        buyButton.disabled = false;
+    text-transform: uppercase;
 
-        loadClothing(overlay);
+    transition: 0.3s;
+}
 
-    });
+.nav a:hover {
+    color: var(--yellow);
+}
 
-});
+
+/* ========================================
+   HERO
+======================================== */
+
+.hero {
+
+    min-height: 700px;
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 100px 25px;
+
+    display: flex;
+    align-items: center;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+
+    max-width: 650px;
+
+    position: relative;
+    z-index: 2;
+}
+
+.tag {
+
+    color: var(--yellow);
+
+    font-size: 13px;
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+.hero h1 {
+
+    margin-top: 20px;
+
+    font-size: clamp(50px, 8vw, 100px);
+
+    line-height: 0.9;
+
+    letter-spacing: -4px;
+}
+
+.hero h1 strong {
+    color: var(--yellow);
+}
+
+.hero p {
+
+    max-width: 500px;
+
+    margin: 30px 0;
+
+    color: var(--gray);
+
+    font-size: 18px;
+
+    line-height: 1.6;
+}
 
 
-/* =========================================
-   CARREGAR ROUPA
-========================================= */
+/* ========================================
+   BOTÕES
+======================================== */
 
-function loadClothing(image) {
+.button {
 
-    scale = 1;
+    display: inline-flex;
 
-    rotation = 0;
+    padding: 18px 28px;
 
-    positionX = 50;
+    background: var(--yellow);
 
-    positionY = 45;
+    color: var(--navy);
 
-    clothingOverlay.src = image;
+    font-weight: 900;
 
-    clothingOverlay.style.display = "block";
+    font-size: 13px;
 
-    controls.style.display = "flex";
+    letter-spacing: 1px;
 
-    emptyTry.style.display = "none";
+    border-radius: 5px;
 
-    updateClothing();
+    transition: 0.3s;
+}
+
+.button:hover {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 30px rgba(245,200,32,0.2);
+}
+
+
+/* ========================================
+   DECORAÇÃO HERO
+======================================== */
+
+.hero-decoration {
+
+    position: absolute;
+
+    right: -100px;
+    top: 80px;
+
+    width: 550px;
+    height: 550px;
+}
+
+.circle {
+
+    width: 450px;
+    height: 450px;
+
+    border-radius: 50%;
+
+    border: 80px solid var(--brown);
+
+    opacity: 0.7;
+}
+
+.yellow-shape {
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 180px;
+    height: 180px;
+
+    background: var(--yellow);
+
+    transform: rotate(25deg);
+
+    opacity: 0.8;
+}
+
+
+/* ========================================
+   TÍTULOS
+======================================== */
+
+.section-title {
+
+    text-align: center;
+
+    margin-bottom: 60px;
+}
+
+.section-title span {
+
+    color: var(--yellow);
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+.section-title h2 {
+
+    margin-top: 12px;
+
+    font-size: clamp(35px, 5vw, 65px);
+
+    line-height: 1;
 
 }
 
 
-/* =========================================
-   ATUALIZA ROUPA
-========================================= */
+/* ========================================
+   COMO FUNCIONA
+======================================== */
 
-function updateClothing() {
+.how-section {
 
-    clothingOverlay.style.left =
-        `${positionX}%`;
+    background: #ffffff;
 
-    clothingOverlay.style.top =
-        `${positionY}%`;
+    color: var(--navy);
 
-    clothingOverlay.style.transform =
-        `
-        translate(-50%, -50%)
-        rotate(${rotation}deg)
-        scale(${scale})
-        `;
+    padding: 100px 25px;
+}
+
+.steps {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.step {
+
+    padding: 35px;
+
+    background: #f5f5f5;
+
+    border-radius: 10px;
+
+    border-top: 5px solid var(--yellow);
+}
+
+.step-number {
+
+    color: var(--yellow);
+
+    font-size: 40px;
+
+    font-weight: 900;
+}
+
+.step h3 {
+
+    margin: 20px 0 10px;
+
+    font-size: 20px;
+}
+
+.step p {
+
+    color: #666;
+
+    line-height: 1.6;
+}
+
+
+/* ========================================
+   CLOSET
+======================================== */
+
+.closet-section {
+
+    padding: 100px 25px;
+
+    background: var(--navy);
+}
+
+.closet-container {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        320px 1fr;
+
+    gap: 30px;
+}
+
+
+/* ========================================
+   CONTROLES
+======================================== */
+
+.controls {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.control-box {
+
+    padding: 25px;
+
+    background: rgba(255,255,255,0.05);
+
+    border: 1px solid rgba(255,255,255,0.1);
+
+    border-radius: 10px;
+}
+
+.control-box h3 {
+
+    font-size: 15px;
+
+    margin-bottom: 8px;
+}
+
+.control-box p {
+
+    color: var(--gray);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin-bottom: 18px;
+}
+
+
+/* ========================================
+   UPLOAD
+======================================== */
+
+.upload-button {
+
+    display: block;
+
+    text-align: center;
+
+    padding: 14px;
+
+    background: var(--yellow);
+
+    color: var(--navy);
+
+    border-radius: 5px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.upload-button:hover {
+
+    transform: translateY(-2px);
+}
+
+
+/* ========================================
+   PRODUTOS BOTÕES
+======================================== */
+
+.product-buttons {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.product-button {
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: 1px solid rgba(255,255,255,0.15);
+
+    background: transparent;
+
+    color: white;
+
+    border-radius: 5px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.product-button:hover,
+.product-button.active {
+
+    background: var(--yellow);
+
+    color: var(--navy);
+
+    border-color: var(--yellow);
+}
+
+
+/* ========================================
+   AJUSTES
+======================================== */
+
+.adjust-buttons {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 7px;
+
+    margin-bottom: 10px;
+}
+
+.adjust-buttons button {
+
+    padding: 12px;
+
+    border: none;
+
+    background: var(--purple);
+
+    color: white;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: 0.2s;
+}
+
+.adjust-buttons button:hover {
+
+    background: var(--yellow);
+
+    color: var(--navy);
+}
+
+.reset-button {
+
+    width: 100%;
+
+    padding: 12px;
+
+    background: transparent;
+
+    color: var(--gray);
+
+    border: 1px solid rgba(255,255,255,0.2);
+
+    border-radius: 5px;
+
+    cursor: pointer;
+}
+
+
+/* ========================================
+   ÁREA DO PROVADOR
+======================================== */
+
+.tryon-area {
+
+    min-width: 0;
+}
+
+.photo-canvas {
+
+    width: 100%;
+
+    min-height: 650px;
+
+    background: #202642;
+
+    border-radius: 12px;
+
+    border: 2px dashed rgba(255,255,255,0.2);
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+.user-photo {
+
+    position: absolute;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: none;
+
+    user-select: none;
+}
+
+.clothing-overlay {
+
+    position: absolute;
+
+    width: 250px;
+
+    max-width: 60%;
+
+    display: none;
+
+    cursor: grab;
+
+    user-select: none;
+
+    touch-action: none;
+
+    transform-origin: center center;
+
+    z-index: 5;
+}
+
+.clothing-overlay:active {
+
+    cursor: grabbing;
+}
+
+
+/* ========================================
+   MENSAGEM VAZIA
+======================================== */
+
+.empty-message {
+
+    text-align: center;
+
+    padding: 30px;
+
+    color: var(--gray);
+}
+
+.camera-icon {
+
+    width: 65px;
+    height: 65px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(245,200,32,0.1);
+
+    color: var(--yellow);
+
+    font-size: 35px;
+}
+
+.empty-message h3 {
+
+    color: white;
+
+    font-size: 17px;
+
+    margin-bottom: 10px;
+}
+
+
+/* ========================================
+   INFO DO LOOK
+======================================== */
+
+.tryon-info {
+
+    margin-top: 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+#selectedProduct {
+
+    margin: 0;
+
+    color: white;
+
+    font-weight: bold;
+}
+
+.buy-button {
+
+    padding: 15px 25px;
+
+    border: none;
+
+    background: var(--yellow);
+
+    color: var(--navy);
+
+    font-weight: 900;
+
+    border-radius: 5px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.buy-button:hover {
+
+    transform: translateY(-2px);
+}
+
+
+/* ========================================
+   ROUPAS
+======================================== */
+
+.products-section {
+
+    padding: 100px 25px;
+
+    background: #ffffff;
+
+    color: var(--navy);
+}
+
+.products-grid {
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.product-card {
+
+    background: #f5f5f5;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+
+    transition: 0.3s;
+}
+
+.product-card:hover {
+
+    transform: translateY(-5px);
+}
+
+.product-image {
+
+    width: 100%;
+
+    height: 320px;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.product-info {
+
+    padding: 20px;
+}
+
+.product-info h3 {
+
+    font-size: 18px;
+
+    margin-bottom: 8px;
+}
+
+.product-info p {
+
+    color: #777;
+
+    margin-bottom: 15px;
+}
+
+.select-product {
+
+    width: 100%;
+
+    padding: 13px;
+
+    background: var(--navy);
+
+    color: white;
+
+    border: none;
+
+    border-radius: 5px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.select-product:hover {
+
+    background: var(--yellow);
+
+    color: var(--navy);
+}
+
+
+/* ========================================
+   FINAL
+======================================== */
+
+.final-section {
+
+    padding: 120px 25px;
+
+    background: var(--brown);
+
+    text-align: center;
+}
+
+.final-section span {
+
+    color: var(--yellow);
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+}
+
+.final-section h2 {
+
+    margin: 25px 0 35px;
+
+    font-size: clamp(40px, 7vw, 80px);
+
+    line-height: 0.95;
+}
+
+.final-section h2 strong {
+
+    color: var(--yellow);
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+footer {
+
+    padding: 50px 25px;
+
+    background: #090d20;
+
+    text-align: center;
+
+    color: var(--gray);
+}
+
+footer img {
+
+    width: 70px;
+
+    height: 70px;
+
+    object-fit: contain;
+
+    margin-bottom: 15px;
+}
+
+footer p {
+
+    margin-bottom: 10px;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 900px) {
+
+    .hero-decoration {
+        opacity: 0.3;
+    }
+
+    .steps {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .closet-container {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .products-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
 
 }
 
 
-/* =========================================
-   AUMENTAR
-========================================= */
+@media (max-width: 600px) {
 
-document
-    .getElementById("scaleUp")
-    .addEventListener("click", function () {
+    .header-container {
 
-        scale += 0.1;
+        min-height: 70px;
 
-        if (scale > 2.5) {
-
-            scale = 2.5;
-
-        }
-
-        updateClothing();
-
-    });
-
-
-/* =========================================
-   DIMINUIR
-========================================= */
-
-document
-    .getElementById("scaleDown")
-    .addEventListener("click", function () {
-
-        scale -= 0.1;
-
-        if (scale < 0.4) {
-
-            scale = 0.4;
-
-        }
-
-        updateClothing();
-
-    });
-
-
-/* =========================================
-   GIRAR ESQUERDA
-========================================= */
-
-document
-    .getElementById("rotateLeft")
-    .addEventListener("click", function () {
-
-        rotation -= 5;
-
-        updateClothing();
-
-    });
-
-
-/* =========================================
-   GIRAR DIREITA
-========================================= */
-
-document
-    .getElementById("rotateRight")
-    .addEventListener("click", function () {
-
-        rotation += 5;
-
-        updateClothing();
-
-    });
-
-
-/* =========================================
-   RESETAR
-========================================= */
-
-document
-    .getElementById("resetPosition")
-    .addEventListener("click", function () {
-
-        scale = 1;
-
-        rotation = 0;
-
-        positionX = 50;
-
-        positionY = 45;
-
-        updateClothing();
-
-    });
-
-
-/* =========================================
-   ARRASTAR COM MOUSE
-========================================= */
-
-clothingOverlay.addEventListener(
-    "mousedown",
-    function (event) {
-
-        event.preventDefault();
-
-        isDragging = true;
-
-        startX = event.clientX;
-
-        startY = event.clientY;
-
-        startPositionX = positionX;
-
-        startPositionY = positionY;
-
+        padding: 10px 15px;
     }
-);
 
+    .logo {
 
-document.addEventListener(
-    "mousemove",
-    function (event) {
-
-        if (!isDragging) {
-
-            return;
-
-        }
-
-        const rect =
-            tryArea.getBoundingClientRect();
-
-        const deltaX =
-            event.clientX - startX;
-
-        const deltaY =
-            event.clientY - startY;
-
-        positionX =
-            startPositionX +
-            (deltaX / rect.width) * 100;
-
-        positionY =
-            startPositionY +
-            (deltaY / rect.height) * 100;
-
-        positionX =
-            Math.max(
-                0,
-                Math.min(100, positionX)
-            );
-
-        positionY =
-            Math.max(
-                0,
-                Math.min(100, positionY)
-            );
-
-        updateClothing();
-
+        width: 50px;
+        height: 50px;
     }
-);
 
+    .nav {
 
-document.addEventListener(
-    "mouseup",
-    function () {
-
-        isDragging = false;
-
+        gap: 12px;
     }
-);
 
+    .nav a {
 
-/* =========================================
-   ARRASTAR NO CELULAR
-========================================= */
-
-clothingOverlay.addEventListener(
-    "touchstart",
-    function (event) {
-
-        if (!event.touches.length) {
-
-            return;
-
-        }
-
-        event.preventDefault();
-
-        isDragging = true;
-
-        startX =
-            event.touches[0].clientX;
-
-        startY =
-            event.touches[0].clientY;
-
-        startPositionX = positionX;
-
-        startPositionY = positionY;
-
-    },
-    {
-        passive: false
+        font-size: 9px;
     }
-);
 
+    .hero {
 
-document.addEventListener(
-    "touchmove",
-    function (event) {
+        min-height: 600px;
 
-        if (!isDragging) {
-
-            return;
-
-        }
-
-        if (!event.touches.length) {
-
-            return;
-
-        }
-
-        const rect =
-            tryArea.getBoundingClientRect();
-
-        const currentX =
-            event.touches[0].clientX;
-
-        const currentY =
-            event.touches[0].clientY;
-
-        const deltaX =
-            currentX - startX;
-
-        const deltaY =
-            currentY - startY;
-
-        positionX =
-            startPositionX +
-            (deltaX / rect.width) * 100;
-
-        positionY =
-            startPositionY +
-            (deltaY / rect.height) * 100;
-
-        positionX =
-            Math.max(
-                0,
-                Math.min(100, positionX)
-            );
-
-        positionY =
-            Math.max(
-                0,
-                Math.min(100, positionY)
-            );
-
-        updateClothing();
-
-    },
-    {
-        passive: false
+        padding: 70px 20px;
     }
-);
 
+    .hero h1 {
 
-document.addEventListener(
-    "touchend",
-    function () {
+        font-size: 55px;
 
-        isDragging = false;
-
+        letter-spacing: -2px;
     }
-);
 
+    .hero p {
 
-/* =========================================
-   BOTÃO DE COMPRA
-========================================= */
-
-buyButton.addEventListener(
-    "click",
-    function () {
-
-        if (!selectedProduct) {
-
-            return;
-
-        }
-
-        const message =
-            `Olá! Quero comprar a peça "${selectedProduct.name}" que montei no Closet Digital.`;
-
-        /*
-         * TROQUE ESTE NÚMERO PELO WHATSAPP
-         * DA ATLÉTICA.
-         *
-         * Exemplo:
-         * 5511999999999
-         */
-
-        const whatsappNumber =
-            "5511999999999";
-
-        const url =
-            `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-
-        window.open(
-            url,
-            "_blank"
-        );
-
+        font-size: 15px;
     }
-);
 
+    .photo-canvas {
 
-/* =========================================
-   ESC / LIMPAR SELEÇÃO
-========================================= */
-
-document.addEventListener(
-    "keydown",
-    function (event) {
-
-        if (event.key === "Escape") {
-
-            clothingItems.forEach(function (item) {
-
-                item.classList.remove("active");
-
-            });
-
-            selectedProduct = null;
-
-            selectedName.textContent =
-                "Nenhuma peça";
-
-            buyButton.disabled = true;
-
-            clothingOverlay.style.display =
-                "none";
-
-            controls.style.display =
-                "none";
-
-            emptyTry.style.display =
-                "block";
-
-        }
-
+        min-height: 500px;
     }
-);
 
+    .products-grid {
 
-/* =========================================
-   DRAG AND DROP DA FOTO
-========================================= */
-
-uploadArea.addEventListener(
-    "dragover",
-    function (event) {
-
-        event.preventDefault();
-
-        uploadArea.style.borderColor =
-            "#F5C820";
-
+        grid-template-columns:
+            1fr;
     }
-);
 
+    .tryon-info {
 
-uploadArea.addEventListener(
-    "dragleave",
-    function () {
+        flex-direction: column;
 
-        uploadArea.style.borderColor =
-            "";
-
+        align-items: stretch;
     }
-);
 
+    .buy-button {
 
-uploadArea.addEventListener(
-    "drop",
-    function (event) {
-
-        event.preventDefault();
-
-        uploadArea.style.borderColor =
-            "";
-
-        const file =
-            event.dataTransfer.files[0];
-
-        if (!file) {
-
-            return;
-
-        }
-
-        if (!file.type.startsWith("image/")) {
-
-            alert("Solte apenas uma imagem.");
-
-            return;
-
-        }
-
-        const reader =
-            new FileReader();
-
-        reader.onload =
-            function (event) {
-
-                userPhoto.src =
-                    event.target.result;
-
-                userPhoto.style.display =
-                    "block";
-
-                uploadContent.style.display =
-                    "none";
-
-                changePhoto.style.display =
-                    "block";
-
-                tryArea.classList.add(
-                    "has-photo"
-                );
-
-                updateTryBackground();
-
-            };
-
-        reader.readAsDataURL(file);
-
+        width: 100%;
     }
-);
+
+}
