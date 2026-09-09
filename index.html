@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,223 +11,524 @@
 
 <body>
 
-    <!-- MENU -->
-    <header class="navbar">
+    <!-- ================= HEADER ================= -->
 
-        <div class="logo-text">
-            FSA
+    <header class="header">
+
+        <div class="header-container">
+
+            <a href="#inicio" class="logo-area">
+                <img
+                    src="assets/logo.png"
+                    alt="Logo da Associação Atlética Acadêmica Fundação Santo André"
+                    class="logo"
+                >
+
+                <div class="logo-text">
+                    <strong>ATLÉTICA FSA</strong>
+                    <span>CLOSET OFICIAL</span>
+                </div>
+            </a>
+
+            <nav class="menu">
+
+                <a href="#inicio">Início</a>
+
+                <a href="#como-funciona">
+                    Como funciona
+                </a>
+
+                <a href="#closet">
+                    Meu Look
+                </a>
+
+                <a href="#roupas">
+                    Roupas
+                </a>
+
+            </nav>
+
         </div>
-
-        <nav>
-            <a href="#inicio">Início</a>
-            <a href="#como-funciona">Como funciona</a>
-            <a href="#closet">Meu Look</a>
-            <a href="#roupas">Roupas</a>
-        </nav>
 
     </header>
 
 
-    <!-- INÍCIO -->
-    <section id="inicio" class="hero">
+    <!-- ================= HERO ================= -->
 
-        <div class="hero-content">
+    <main>
 
-            <span class="tag">CLOSET OFICIAL</span>
+        <section class="hero" id="inicio">
 
-            <h1>
-                MONTE SEU<br>
-                LOOK DA ATLÉTICA.
-            </h1>
+            <div class="hero-content">
 
-            <p>
-                Escolha suas peças favoritas, monte seu look
-                e veja como ficaria antes de comprar.
-            </p>
+                <span class="tag">
+                    CLOSET OFICIAL DA ATLÉTICA
+                </span>
 
-            <a href="#closet" class="button">
-                MONTAR MEU LOOK
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <!-- COMO FUNCIONA -->
-    <section id="como-funciona" class="section">
-
-        <div class="section-title">
-
-            <span>É MUITO FÁCIL</span>
-
-            <h2>
-                MONTE SEU LOOK
-            </h2>
-
-        </div>
-
-
-        <div class="steps">
-
-            <div class="step">
-
-                <strong>01</strong>
-
-                <h3>TIRE SUA FOTO</h3>
+                <h1>
+                    MONTE SEU<br>
+                    <span>LOOK DA ATLÉTICA.</span>
+                </h1>
 
                 <p>
-                    Tire uma foto da parte de baixo do seu corpo,
-                    mostrando sua calça, tênis e acessórios.
+                    Escolha suas peças favoritas, monte seu look
+                    e veja como ficaria antes de comprar.
                 </p>
+
+                <a href="#closet" class="btn-primary">
+                    MONTAR MEU LOOK
+                </a>
 
             </div>
 
+            <div class="hero-logo">
 
-            <div class="step">
-
-                <strong>02</strong>
-
-                <h3>ESCOLHA A ROUPA</h3>
-
-                <p>
-                    Escolha uma das peças oficiais
-                    disponíveis no nosso closet.
-                </p>
-
-            </div>
-
-
-            <div class="step">
-
-                <strong>03</strong>
-
-                <h3>MONTE SEU LOOK</h3>
-
-                <p>
-                    Arraste a roupa sobre sua foto e ajuste
-                    tamanho e posição.
-                </p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- CLOSET -->
-    <section id="closet" class="closet-section">
-
-        <div class="section-title">
-
-            <span>SEU PROVADOR DIGITAL</span>
-
-            <h2>MEU LOOK</h2>
-
-        </div>
-
-
-        <div class="closet-container">
-
-
-            <!-- PAINEL DE CONTROLE -->
-
-            <div class="controls-panel">
-
-                <h3>1. SUA FOTO</h3>
-
-                <p>
-                    Escolha uma foto para começar.
-                </p>
-
-                <label for="photoInput" class="upload-button">
-                    📷 ESCOLHER FOTO
-                </label>
-
-                <input
-                    type="file"
-                    id="photoInput"
-                    accept="image/*"
+                <img
+                    src="assets/logo.png"
+                    alt="Atlética FSA"
                 >
 
+            </div>
 
-                <div class="divider"></div>
+        </section>
 
 
-                <h3>2. ESCOLHA UMA PEÇA</h3>
+        <!-- ================= COMO FUNCIONA ================= -->
 
-                <div id="products" class="products">
+        <section class="how-section" id="como-funciona">
 
-                    <!-- As roupas serão colocadas aqui pelo JavaScript -->
+            <div class="section-title">
+
+                <span>É MUITO FÁCIL</span>
+
+                <h2>
+                    MONTE SEU LOOK.
+                </h2>
+
+            </div>
+
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <h3>
+                        TIRE SUA FOTO
+                    </h3>
+
+                    <p>
+                        Tire uma foto da parte de baixo do seu corpo,
+                        mostrando sua calça, tênis e acessórios.
+                    </p>
 
                 </div>
 
 
-                <div class="divider"></div>
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <h3>
+                        ESCOLHA A ROUPA
+                    </h3>
+
+                    <p>
+                        Escolha uma das peças oficiais disponíveis
+                        no nosso closet.
+                    </p>
+
+                </div>
 
 
-                <h3>3. AJUSTE O LOOK</h3>
+                <div class="step">
 
-                <div class="tools">
+                    <div class="step-number">
+                        03
+                    </div>
 
-                    <button id="minusBtn">−</button>
+                    <h3>
+                        MONTE SEU LOOK
+                    </h3>
 
-                    <button id="plusBtn">+</button>
-
-                    <button id="rotateLeft">↶</button>
-
-                    <button id="rotateRight">↷</button>
-
-                    <button id="resetBtn">RESETAR ROUPA</button>
+                    <p>
+                        Arraste a roupa sobre sua foto e ajuste
+                        tamanho e posição.
+                    </p>
 
                 </div>
 
             </div>
 
+        </section>
 
-            <!-- PROVADOR -->
 
-            <div class="fitting-area">
+        <!-- ================= CLOSET ================= -->
 
-                <h3>SEU LOOK APARECERÁ AQUI</h3>
+        <section class="closet-section" id="closet">
 
-                <div id="fittingRoom" class="fitting-room">
+            <div class="section-title center">
 
-                    <div id="emptyMessage" class="empty-message">
+                <span>SEU PROVADOR DIGITAL</span>
 
-                        <div class="empty-icon">
-                            👕
-                        </div>
+                <h2>
+                    MEU LOOK
+                </h2>
+
+                <p>
+                    Escolha sua foto e depois experimente
+                    as peças da Atlética.
+                </p>
+
+            </div>
+
+
+            <div class="closet-grid">
+
+
+                <!-- PAINEL DE CONTROLE -->
+
+                <div class="control-panel">
+
+                    <div class="control-box">
+
+                        <h3>
+                            1. SUA FOTO
+                        </h3>
 
                         <p>
-                            Envie uma foto para começar.
+                            Escolha uma foto para começar.
                         </p>
+
+
+                        <input
+                            type="file"
+                            id="photoInput"
+                            accept="image/*"
+                            hidden
+                        >
+
+                        <button
+                            type="button"
+                            id="photoButton"
+                            class="btn-primary full"
+                        >
+                            ESCOLHER FOTO
+                        </button>
+
+
+                        <div
+                            id="photoStatus"
+                            class="status"
+                        >
+                            Nenhuma foto selecionada.
+                        </div>
 
                     </div>
 
-                    <img
-                        id="userPhoto"
-                        class="user-photo"
-                        alt="Sua foto"
-                    >
 
-                    <img
-                        id="clothingOverlay"
-                        class="clothing-overlay"
-                        alt="Roupa selecionada"
-                    >
+
+                    <div class="control-box">
+
+                        <h3>
+                            2. ESCOLHA UMA PEÇA
+                        </h3>
+
+                        <p>
+                            Clique em uma roupa para experimentar.
+                        </p>
+
+
+                        <div
+                            class="clothing-buttons"
+                            id="clothingButtons"
+                        >
+
+                            <!-- CAMISETA AZUL -->
+
+                            <button
+                                type="button"
+                                class="clothing-button"
+                                data-name="Camiseta Azul"
+                                data-image="assets/camiseta-azul.png"
+                            >
+                                <img
+                                    src="assets/camiseta-azul.jpg"
+                                    alt="Camiseta Azul"
+                                >
+
+                                <span>
+                                    CAMISETA AZUL
+                                </span>
+                            </button>
+
+
+                            <!-- CAMISETA BRANCA -->
+
+                            <button
+                                type="button"
+                                class="clothing-button"
+                                data-name="Camiseta Branca"
+                                data-image="assets/camiseta-branca.png"
+                            >
+                                <img
+                                    src="assets/camiseta-branca.jpg"
+                                    alt="Camiseta Branca"
+                                >
+
+                                <span>
+                                    CAMISETA BRANCA
+                                </span>
+                            </button>
+
+
+                            <!-- MOLETOM AMARELO -->
+
+                            <button
+                                type="button"
+                                class="clothing-button"
+                                data-name="Moletom Amarelo"
+                                data-image="assets/moletom-amarelo.png"
+                            >
+                                <img
+                                    src="assets/moletom-amarelo.jpg"
+                                    alt="Moletom Amarelo"
+                                >
+
+                                <span>
+                                    MOLETOM AMARELO
+                                </span>
+                            </button>
+
+
+                            <!-- MOLETOM BRANCO -->
+
+                            <button
+                                type="button"
+                                class="clothing-button"
+                                data-name="Moletom Branco"
+                                data-image="assets/moletom-branco.png"
+                            >
+                                <img
+                                    src="assets/moletom-branco.jpg"
+                                    alt="Moletom Branco"
+                                >
+
+                                <span>
+                                    MOLETOM BRANCO
+                                </span>
+                            </button>
+
+
+                            <!-- MOLETOM PRETO -->
+
+                            <button
+                                type="button"
+                                class="clothing-button"
+                                data-name="Moletom Preto"
+                                data-image="assets/moletom-preto.png"
+                            >
+                                <img
+                                    src="assets/moletom-preto.jpg"
+                                    alt="Moletom Preto"
+                                >
+
+                                <span>
+                                    MOLETOM PRETO
+                                </span>
+                            </button>
+
+
+                            <!-- JAQUETA -->
+
+                            <button
+                                type="button"
+                                class="clothing-button"
+                                data-name="Jaqueta Varsity"
+                                data-image="assets/jaqueta-varsity.png"
+                            >
+                                <img
+                                    src="assets/jaqueta-varsity.jpg"
+                                    alt="Jaqueta Varsity"
+                                >
+
+                                <span>
+                                    JAQUETA VARSITY
+                                </span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONTROLES -->
+
+                    <div class="control-box">
+
+                        <h3>
+                            3. AJUSTE O LOOK
+                        </h3>
+
+                        <div class="adjust-buttons">
+
+                            <button
+                                type="button"
+                                id="moveUp"
+                            >
+                                ↑
+                            </button>
+
+                            <button
+                                type="button"
+                                id="moveDown"
+                            >
+                                ↓
+                            </button>
+
+                            <button
+                                type="button"
+                                id="moveLeft"
+                            >
+                                ←
+                            </button>
+
+                            <button
+                                type="button"
+                                id="moveRight"
+                            >
+                                →
+                            </button>
+
+                            <button
+                                type="button"
+                                id="increase"
+                            >
+                                +
+                            </button>
+
+                            <button
+                                type="button"
+                                id="decrease"
+                            >
+                                −
+                            </button>
+
+                            <button
+                                type="button"
+                                id="rotateLeft"
+                            >
+                                ↶
+                            </button>
+
+                            <button
+                                type="button"
+                                id="rotateRight"
+                            >
+                                ↷
+                            </button>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            id="resetClothing"
+                            class="btn-secondary full"
+                        >
+                            RESETAR ROUPA
+                        </button>
+
+                    </div>
 
                 </div>
 
 
-                <div class="selected-info">
 
-                    <span id="selectedName">
-                        Nenhuma peça selecionada
-                    </span>
+                <!-- PROVADOR -->
 
-                    <button id="buyButton" class="buy-button">
+                <div class="tryon-area">
+
+                    <div class="tryon-header">
+
+                        <span>
+                            SEU LOOK APARECERÁ AQUI
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="tryon"
+                        id="tryon"
+                    >
+
+                        <div
+                            id="emptyMessage"
+                            class="empty-message"
+                        >
+
+                            <div class="empty-icon">
+                                +
+                            </div>
+
+                            <h3>
+                                Comece seu look
+                            </h3>
+
+                            <p>
+                                Envie uma foto para começar.
+                            </p>
+
+                        </div>
+
+
+                        <img
+                            id="userPhoto"
+                            class="user-photo"
+                            alt="Sua foto"
+                        >
+
+
+                        <div
+                            id="clothingLayer"
+                            class="clothing-layer"
+                        >
+
+                            <img
+                                id="clothingImage"
+                                alt="Roupa selecionada"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="selected-info">
+
+                        <span>
+                            Sua foto
+                        </span>
+
+                        <strong id="selectedClothing">
+                            Nenhuma peça selecionada
+                        </strong>
+
+                    </div>
+
+
+                    <button
+                        type="button"
+                        id="buyButton"
+                        class="btn-primary full"
+                    >
                         QUERO ESSE LOOK
                     </button>
 
@@ -236,55 +536,304 @@
 
             </div>
 
-        </div>
-
-    </section>
+        </section>
 
 
-    <!-- ROUPAS -->
-    <section id="roupas" class="section">
 
-        <div class="section-title">
+        <!-- ================= ROUPAS ================= -->
 
-            <span>COLEÇÃO OFICIAL</span>
+        <section
+            class="products-section"
+            id="roupas"
+        >
 
-            <h2>ESCOLHA SUA PEÇA</h2>
+            <div class="section-title center">
 
-            <p>
-                Veja as peças disponíveis no closet da Atlética.
-            </p>
+                <span>
+                    COLEÇÃO OFICIAL
+                </span>
 
-        </div>
+                <h2>
+                    ESCOLHA SUA PEÇA
+                </h2>
 
-        <div id="catalog" class="catalog">
+                <p>
+                    Já sabe qual é o seu?
+                </p>
 
-            <!-- Catálogo criado pelo JavaScript -->
-
-        </div>
-
-    </section>
+            </div>
 
 
-    <!-- FINAL -->
-    <section class="final-section">
+            <div class="products-grid">
 
-        <h2>
-            MONTE.<br>
-            EXPERIMENTE.<br>
-            VISTA A ATLÉTICA.
-        </h2>
 
-        <a href="#closet" class="button">
-            CRIAR MEU LOOK
-        </a>
+                <article class="product-card">
 
-    </section>
+                    <div class="product-image">
 
+                        <img
+                            src="assets/camiseta-azul.jpg"
+                            alt="Camiseta Azul"
+                        >
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <span>
+                            CAMISETA
+                        </span>
+
+                        <h3>
+                            Camiseta Azul
+                        </h3>
+
+                        <button
+                            type="button"
+                            class="choose-product"
+                            data-image="assets/camiseta-azul.png"
+                            data-name="Camiseta Azul"
+                        >
+                            EXPERIMENTAR
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="assets/camiseta-branca.jpg"
+                            alt="Camiseta Branca"
+                        >
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <span>
+                            CAMISETA
+                        </span>
+
+                        <h3>
+                            Camiseta Branca
+                        </h3>
+
+                        <button
+                            type="button"
+                            class="choose-product"
+                            data-image="assets/camiseta-branca.png"
+                            data-name="Camiseta Branca"
+                        >
+                            EXPERIMENTAR
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="assets/moletom-amarelo.jpg"
+                            alt="Moletom Amarelo"
+                        >
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <span>
+                            MOLETOM
+                        </span>
+
+                        <h3>
+                            Moletom Amarelo
+                        </h3>
+
+                        <button
+                            type="button"
+                            class="choose-product"
+                            data-image="assets/moletom-amarelo.png"
+                            data-name="Moletom Amarelo"
+                        >
+                            EXPERIMENTAR
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="assets/moletom-branco.jpg"
+                            alt="Moletom Branco"
+                        >
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <span>
+                            MOLETOM
+                        </span>
+
+                        <h3>
+                            Moletom Branco
+                        </h3>
+
+                        <button
+                            type="button"
+                            class="choose-product"
+                            data-image="assets/moletom-branco.png"
+                            data-name="Moletom Branco"
+                        >
+                            EXPERIMENTAR
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="assets/moletom-preto.jpg"
+                            alt="Moletom Preto"
+                        >
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <span>
+                            MOLETOM
+                        </span>
+
+                        <h3>
+                            Moletom Preto
+                        </h3>
+
+                        <button
+                            type="button"
+                            class="choose-product"
+                            data-image="assets/moletom-preto.png"
+                            data-name="Moletom Preto"
+                        >
+                            EXPERIMENTAR
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <article class="product-card">
+
+                    <div class="product-image">
+
+                        <img
+                            src="assets/jaqueta-varsity.jpg"
+                            alt="Jaqueta Varsity"
+                        >
+
+                    </div>
+
+                    <div class="product-info">
+
+                        <span>
+                            JAQUETA
+                        </span>
+
+                        <h3>
+                            Jaqueta Varsity
+                        </h3>
+
+                        <button
+                            type="button"
+                            class="choose-product"
+                            data-image="assets/jaqueta-varsity.png"
+                            data-name="Jaqueta Varsity"
+                        >
+                            EXPERIMENTAR
+                        </button>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= CTA ================= -->
+
+        <section class="final-cta">
+
+            <div>
+
+                <span>
+                    SEU ESTILO. SUA ATLÉTICA.
+                </span>
+
+                <h2>
+                    MONTE.<br>
+                    EXPERIMENTE.<br>
+                    VISTA A ATLÉTICA.
+                </h2>
+
+                <a
+                    href="#closet"
+                    class="btn-primary"
+                >
+                    CRIAR MEU LOOK
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ================= FOOTER ================= -->
 
     <footer>
 
+        <img
+            src="assets/logo.png"
+            alt="Atlética FSA"
+        >
+
         <p>
-            © 2026 Closet da Atlética FSA
+            © 2026 Associação Atlética Acadêmica
+            Fundação Santo André
+        </p>
+
+        <p>
+            CLOSET OFICIAL
         </p>
 
     </footer>
@@ -293,5 +842,4 @@
     <script src="script.js"></script>
 
 </body>
-
 </html>
