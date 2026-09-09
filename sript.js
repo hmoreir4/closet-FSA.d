@@ -1,258 +1,95 @@
-document.addEventListener("DOMContentLoaded", function () {
+/* =========================================
+   CLOSET DA ATLÉTICA FSA
+========================================= */
 
 
-    /* =========================================
-       ROUPAS DA ATLÉTICA
+/* =========================================
+   ELEMENTOS
+========================================= */
 
-       Os nomes abaixo são EXATAMENTE os
-       arquivos que você colocou dentro de assets.
-    ========================================= */
+const photoInput =
+    document.getElementById("photoInput");
 
-    const products = [
+const photoButton =
+    document.getElementById("photoButton");
 
-        {
-            name: "Camiseta Azul",
-            image: "assets/camiseta-azul.jpg",
-            overlay: "assets/camiseta-azul.png"
-        },
+const photoStatus =
+    document.getElementById("photoStatus");
 
-        {
-            name: "Camiseta Branca",
-            image: "assets/camiseta-branca.jpg",
-            overlay: "assets/camiseta-branca.png"
-        },
+const userPhoto =
+    document.getElementById("userPhoto");
 
-        {
-            name: "Moletom Amarelo",
-            image: "assets/moletom-amarelo.jpg",
-            overlay: "assets/moletom-amarelo.png"
-        },
+const emptyMessage =
+    document.getElementById("emptyMessage");
 
-        {
-            name: "Moletom Branco",
-            image: "assets/moletom-branco.jpg",
-            overlay: "assets/moletom-branco.png"
-        },
+const clothingLayer =
+    document.getElementById("clothingLayer");
 
-        {
-            name: "Moletom Preto",
-            image: "assets/moletom-preto.jpg",
-            overlay: "assets/moletom-preto.png"
-        },
+const clothingImage =
+    document.getElementById("clothingImage");
 
-        {
-            name: "Jaqueta Varsity",
-            image: "assets/jaqueta-varsity.jpg",
-            overlay: "assets/jaqueta-varsity.png"
-        }
+const selectedClothing =
+    document.getElementById("selectedClothing");
 
-    ];
+const resetClothing =
+    document.getElementById("resetClothing");
 
+const buyButton =
+    document.getElementById("buyButton");
 
-    /* =========================================
-       ELEMENTOS
-    ========================================= */
 
-    const photoInput = document.getElementById("photoInput");
 
-    const userPhoto = document.getElementById("userPhoto");
+/* =========================================
+   VARIÁVEIS
+========================================= */
 
-    const clothingOverlay =
-        document.getElementById("clothingOverlay");
+let currentX = 0;
 
-    const emptyMessage =
-        document.getElementById("emptyMessage");
+let currentY = 0;
 
-    const productsContainer =
-        document.getElementById("products");
+let currentScale = 1;
 
-    const catalogContainer =
-        document.getElementById("catalog");
+let currentRotation = 0;
 
-    const selectedName =
-        document.getElementById("selectedName");
+let currentClothingName = "";
 
+let isDragging = false;
 
-    const plusBtn =
-        document.getElementById("plusBtn");
+let startMouseX = 0;
 
-    const minusBtn =
-        document.getElementById("minusBtn");
+let startMouseY = 0;
 
-    const rotateLeft =
-        document.getElementById("rotateLeft");
+let startX = 0;
 
-    const rotateRight =
-        document.getElementById("rotateRight");
+let startY = 0;
 
-    const resetBtn =
-        document.getElementById("resetBtn");
 
-    const buyButton =
-        document.getElementById("buyButton");
 
+/* =========================================
+   ABRIR SELETOR DE FOTO
+========================================= */
 
-    /* =========================================
-       VARIÁVEIS DA ROUPA
-    ========================================= */
+photoButton.addEventListener(
+    "click",
+    function () {
 
-    let selectedProduct = null;
-
-    let scale = 1;
-
-    let rotation = 0;
-
-    let positionX = 0;
-
-    let positionY = 0;
-
-
-    /* =========================================
-       MOSTRAR ROUPAS
-    ========================================= */
-
-    products.forEach(function (product, index) {
-
-
-        const card = document.createElement("div");
-
-        card.className = "product";
-
-
-        card.innerHTML = `
-
-            <img
-                src="${product.image}"
-                alt="${product.name}"
-                onerror="this.style.display='none'"
-            >
-
-            <div class="product-name">
-                ${product.name}
-            </div>
-
-        `;
-
-
-        card.addEventListener("click", function () {
-
-            selectProduct(product, card);
-
-        });
-
-
-        productsContainer.appendChild(card);
-
-    });
-
-
-    /* =========================================
-       CATÁLOGO
-    ========================================= */
-
-    products.forEach(function (product) {
-
-
-        const card = document.createElement("div");
-
-        card.className = "catalog-card";
-
-
-        card.innerHTML = `
-
-            <img
-                src="${product.image}"
-                alt="${product.name}"
-            >
-
-            <div class="catalog-info">
-
-                <h3>
-                    ${product.name}
-                </h3>
-
-                <p>
-                    Peça oficial da Atlética FSA
-                </p>
-
-            </div>
-
-        `;
-
-
-        catalogContainer.appendChild(card);
-
-    });
-
-
-    /* =========================================
-       ESCOLHER ROUPA
-    ========================================= */
-
-    function selectProduct(product, card) {
-
-
-        selectedProduct = product;
-
-
-        // tira seleção das outras roupas
-
-        document
-            .querySelectorAll(".product")
-            .forEach(function (item) {
-
-                item.classList.remove("active");
-
-            });
-
-
-        card.classList.add("active");
-
-
-        // coloca a imagem PNG da roupa
-
-        clothingOverlay.src = product.overlay;
-
-
-        clothingOverlay.style.display = "block";
-
-
-        // mostra o nome
-
-        selectedName.textContent =
-            product.name;
-
-
-        // reseta posição
-
-        resetClothing();
-
-
-        /*
-         * Caso a foto ainda não tenha sido escolhida,
-         * avisamos o usuário.
-         */
-
-        if (!userPhoto.src) {
-
-            alert(
-                "Primeiro escolha uma foto sua para montar o look."
-            );
-
-        }
+        photoInput.click();
 
     }
+);
 
 
-    /* =========================================
-       ESCOLHER FOTO
-    ========================================= */
 
-    photoInput.addEventListener("change", function (event) {
+/* =========================================
+   FOTO SELECIONADA
+========================================= */
 
+photoInput.addEventListener(
+    "change",
+    function (event) {
 
-        const file = event.target.files[0];
-
+        const file =
+            event.target.files[0];
 
         if (!file) {
 
@@ -261,226 +98,296 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
+        /*
+         * Verifica se realmente é uma imagem.
+         */
+
         if (!file.type.startsWith("image/")) {
 
-            alert("Escolha uma imagem válida.");
+            photoStatus.textContent =
+                "Escolha uma imagem válida.";
 
             return;
 
         }
 
 
+        /*
+         * Cria uma URL temporária
+         * para mostrar a foto.
+         */
+
         const imageURL =
             URL.createObjectURL(file);
 
 
-        userPhoto.src = imageURL;
+        userPhoto.onload =
+            function () {
+
+                URL.revokeObjectURL(imageURL);
+
+            };
 
 
-        userPhoto.style.display = "block";
-
-
-        emptyMessage.style.display = "none";
+        userPhoto.src =
+            imageURL;
 
 
         /*
-         * Quando a foto carregar,
-         * colocamos a roupa novamente.
+         * Mostra a foto.
          */
 
-        userPhoto.onload = function () {
-
-            if (selectedProduct) {
-
-                clothingOverlay.style.display = "block";
-
-            }
-
-        };
-
-    });
+        userPhoto.style.display =
+            "block";
 
 
-    /* =========================================
-       ATUALIZAR ROUPA
-    ========================================= */
+        /*
+         * Esconde mensagem inicial.
+         */
 
-    function updateClothing() {
-
-
-        clothingOverlay.style.transform =
-
-            `translate(calc(-50% + ${positionX}px), calc(-50% + ${positionY}px))
-             scale(${scale})
-             rotate(${rotation}deg)`;
-
-    }
+        emptyMessage.style.display =
+            "none";
 
 
-    /* =========================================
-       RESETAR
-    ========================================= */
+        /*
+         * Atualiza texto.
+         */
 
-    function resetClothing() {
-
-
-        scale = 1;
-
-        rotation = 0;
-
-        positionX = 0;
-
-        positionY = 0;
+        photoStatus.textContent =
+            "✓ Foto adicionada com sucesso!";
 
 
-        clothingOverlay.style.left = "50%";
+        /*
+         * Mostra o closet.
+         */
 
-        clothingOverlay.style.top = "50%";
-
-
-        updateClothing();
+        document
+            .getElementById("closet")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
 
     }
+);
 
 
-    /* =========================================
-       AUMENTAR
-    ========================================= */
 
-    plusBtn.addEventListener("click", function () {
+/* =========================================
+   SELECIONAR ROUPAS
+========================================= */
 
-
-        scale += 0.1;
-
-
-        if (scale > 3) {
-
-            scale = 3;
-
-        }
-
-
-        updateClothing();
-
-    });
-
-
-    /* =========================================
-       DIMINUIR
-    ========================================= */
-
-    minusBtn.addEventListener("click", function () {
-
-
-        scale -= 0.1;
-
-
-        if (scale < 0.3) {
-
-            scale = 0.3;
-
-        }
-
-
-        updateClothing();
-
-    });
-
-
-    /* =========================================
-       GIRAR ESQUERDA
-    ========================================= */
-
-    rotateLeft.addEventListener("click", function () {
-
-
-        rotation -= 5;
-
-
-        updateClothing();
-
-    });
-
-
-    /* =========================================
-       GIRAR DIREITA
-    ========================================= */
-
-    rotateRight.addEventListener("click", function () {
-
-
-        rotation += 5;
-
-
-        updateClothing();
-
-    });
-
-
-    /* =========================================
-       RESET
-    ========================================= */
-
-    resetBtn.addEventListener("click", function () {
-
-
-        resetClothing();
-
-    });
-
-
-    /* =========================================
-       ARRASTAR ROUPA
-    ========================================= */
-
-    let dragging = false;
-
-    let startX = 0;
-
-    let startY = 0;
-
-
-    clothingOverlay.addEventListener(
-        "pointerdown",
-        function (event) {
-
-
-            dragging = true;
-
-
-            clothingOverlay.setPointerCapture(
-                event.pointerId
-            );
-
-
-            startX = event.clientX - positionX;
-
-            startY = event.clientY - positionY;
-
-
-        }
+const clothingButtons =
+    document.querySelectorAll(
+        ".clothing-button"
     );
 
 
-    clothingOverlay.addEventListener(
-        "pointermove",
-        function (event) {
+clothingButtons.forEach(
+    function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const image =
+                    button.dataset.image;
+
+                const name =
+                    button.dataset.name;
 
 
-            if (!dragging) {
-
-                return;
+                selectClothing(
+                    image,
+                    name
+                );
 
             }
+        );
+
+    }
+);
 
 
-            positionX =
-                event.clientX - startX;
+
+/* =========================================
+   FUNÇÃO SELECIONAR ROUPA
+========================================= */
+
+function selectClothing(
+    image,
+    name
+) {
+
+    /*
+     * Verifica se existe foto.
+     */
+
+    if (
+        !userPhoto.src ||
+        userPhoto.style.display === "none"
+    ) {
+
+        alert(
+            "Primeiro escolha uma foto para montar seu look."
+        );
+
+        photoButton.click();
+
+        return;
+
+    }
 
 
-            positionY =
-                event.clientY - startY;
+    /*
+     * Cria uma nova imagem temporária
+     * para verificar se o arquivo existe.
+     */
 
+    const testImage =
+        new Image();
+
+
+    testImage.onload =
+        function () {
+
+            /*
+             * Arquivo encontrado.
+             */
+
+            clothingImage.src =
+                image;
+
+
+            clothingImage.alt =
+                name;
+
+
+            clothingLayer.style.display =
+                "block";
+
+
+            /*
+             * Nome da peça.
+             */
+
+            selectedClothing.textContent =
+                name;
+
+
+            currentClothingName =
+                name;
+
+
+            /*
+             * Reseta posição.
+             */
+
+            resetPosition();
+
+        };
+
+
+    testImage.onerror =
+        function () {
+
+            alert(
+                "Não consegui encontrar a imagem da roupa:\n\n" +
+                image +
+                "\n\nVerifique se o nome do arquivo no GitHub está exatamente igual."
+            );
+
+        };
+
+
+    /*
+     * Tenta carregar o PNG.
+     */
+
+    testImage.src =
+        image;
+
+}
+
+
+
+/* =========================================
+   POSIÇÃO DA ROUPA
+========================================= */
+
+function updateClothing() {
+
+    clothingLayer.style.transform =
+        `
+        translate(
+            calc(-50% + ${currentX}px),
+            calc(-50% + ${currentY}px)
+        )
+        rotate(${currentRotation}deg)
+        scale(${currentScale})
+        `;
+
+}
+
+
+
+/* =========================================
+   RESET
+========================================= */
+
+function resetPosition() {
+
+    currentX = 0;
+
+    currentY = 0;
+
+    currentScale = 1;
+
+    currentRotation = 0;
+
+    updateClothing();
+
+}
+
+
+
+function resetAllClothing() {
+
+    resetPosition();
+
+    clothingLayer.style.display =
+        "none";
+
+    clothingImage.src =
+        "";
+
+    selectedClothing.textContent =
+        "Nenhuma peça selecionada";
+
+    currentClothingName =
+        "";
+
+}
+
+
+
+resetClothing.addEventListener(
+    "click",
+    resetAllClothing
+);
+
+
+
+/* =========================================
+   BOTÕES DE MOVIMENTO
+========================================= */
+
+document
+    .getElementById("moveUp")
+    .addEventListener(
+        "click",
+        function () {
+
+            currentY -= 10;
 
             updateClothing();
 
@@ -488,34 +395,356 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
 
-    clothingOverlay.addEventListener(
-        "pointerup",
+document
+    .getElementById("moveDown")
+    .addEventListener(
+        "click",
         function () {
 
-            dragging = false;
+            currentY += 10;
+
+            updateClothing();
 
         }
     );
 
 
-    clothingOverlay.addEventListener(
-        "pointercancel",
+document
+    .getElementById("moveLeft")
+    .addEventListener(
+        "click",
         function () {
 
-            dragging = false;
+            currentX -= 10;
+
+            updateClothing();
 
         }
     );
 
 
-    /* =========================================
-       BOTÃO DE COMPRA
-    ========================================= */
+document
+    .getElementById("moveRight")
+    .addEventListener(
+        "click",
+        function () {
 
-    buyButton.addEventListener("click", function () {
+            currentX += 10;
+
+            updateClothing();
+
+        }
+    );
 
 
-        if (!selectedProduct) {
+
+/* =========================================
+   TAMANHO
+========================================= */
+
+document
+    .getElementById("increase")
+    .addEventListener(
+        "click",
+        function () {
+
+            currentScale += 0.1;
+
+            if (currentScale > 2.5) {
+
+                currentScale = 2.5;
+
+            }
+
+            updateClothing();
+
+        }
+    );
+
+
+document
+    .getElementById("decrease")
+    .addEventListener(
+        "click",
+        function () {
+
+            currentScale -= 0.1;
+
+            if (currentScale < 0.4) {
+
+                currentScale = 0.4;
+
+            }
+
+            updateClothing();
+
+        }
+    );
+
+
+
+/* =========================================
+   ROTAÇÃO
+========================================= */
+
+document
+    .getElementById("rotateLeft")
+    .addEventListener(
+        "click",
+        function () {
+
+            currentRotation -= 5;
+
+            updateClothing();
+
+        }
+    );
+
+
+document
+    .getElementById("rotateRight")
+    .addEventListener(
+        "click",
+        function () {
+
+            currentRotation += 5;
+
+            updateClothing();
+
+        }
+    );
+
+
+
+/* =========================================
+   ARRASTAR ROUPA COM MOUSE
+========================================= */
+
+clothingLayer.addEventListener(
+    "mousedown",
+    function (event) {
+
+        isDragging = true;
+
+        startMouseX =
+            event.clientX;
+
+        startMouseY =
+            event.clientY;
+
+        startX =
+            currentX;
+
+        startY =
+            currentY;
+
+    }
+);
+
+
+document.addEventListener(
+    "mousemove",
+    function (event) {
+
+        if (!isDragging) {
+
+            return;
+
+        }
+
+
+        const differenceX =
+            event.clientX -
+            startMouseX;
+
+
+        const differenceY =
+            event.clientY -
+            startMouseY;
+
+
+        currentX =
+            startX + differenceX;
+
+
+        currentY =
+            startY + differenceY;
+
+
+        updateClothing();
+
+    }
+);
+
+
+document.addEventListener(
+    "mouseup",
+    function () {
+
+        isDragging = false;
+
+    }
+);
+
+
+
+/* =========================================
+   ARRASTAR NO CELULAR
+========================================= */
+
+clothingLayer.addEventListener(
+    "touchstart",
+    function (event) {
+
+        const touch =
+            event.touches[0];
+
+
+        isDragging = true;
+
+        startMouseX =
+            touch.clientX;
+
+        startMouseY =
+            touch.clientY;
+
+        startX =
+            currentX;
+
+        startY =
+            currentY;
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+clothingLayer.addEventListener(
+    "touchmove",
+    function (event) {
+
+        if (!isDragging) {
+
+            return;
+
+        }
+
+
+        const touch =
+            event.touches[0];
+
+
+        const differenceX =
+            touch.clientX -
+            startMouseX;
+
+
+        const differenceY =
+            touch.clientY -
+            startMouseY;
+
+
+        currentX =
+            startX + differenceX;
+
+
+        currentY =
+            startY + differenceY;
+
+
+        updateClothing();
+
+    },
+    {
+        passive: true
+    }
+);
+
+
+clothingLayer.addEventListener(
+    "touchend",
+    function () {
+
+        isDragging = false;
+
+    }
+);
+
+
+
+/* =========================================
+   BOTÕES "EXPERIMENTAR"
+========================================= */
+
+const chooseProducts =
+    document.querySelectorAll(
+        ".choose-product"
+    );
+
+
+chooseProducts.forEach(
+    function (button) {
+
+        button.addEventListener(
+            "click",
+            function () {
+
+                const image =
+                    button.dataset.image;
+
+                const name =
+                    button.dataset.name;
+
+
+                /*
+                 * Vai para o provador.
+                 */
+
+                document
+                    .getElementById("closet")
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+
+                /*
+                 * Seleciona a roupa depois
+                 * de chegar ao closet.
+                 */
+
+                setTimeout(
+                    function () {
+
+                        selectClothing(
+                            image,
+                            name
+                        );
+
+                    },
+                    500
+                );
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   BOTÃO QUERO ESSE LOOK
+========================================= */
+
+buyButton.addEventListener(
+    "click",
+    function () {
+
+        if (
+            !currentClothingName
+        ) {
 
             alert(
                 "Escolha uma peça primeiro."
@@ -527,21 +756,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
         alert(
-            `Você escolheu: ${selectedProduct.name}\n\nEm breve você poderá finalizar a compra desse look!`
+            "Você escolheu: " +
+            currentClothingName +
+            "\n\nEm breve podemos conectar este botão ao pedido/WhatsApp da Atlética."
         );
 
-    });
+    }
+);
 
 
-    /* =========================================
-       ESTADO INICIAL
-    ========================================= */
 
-    clothingOverlay.style.display = "none";
+/* =========================================
+   INICIALIZAÇÃO
+========================================= */
 
-    userPhoto.style.display = "none";
+updateClothing();
 
-    resetClothing();
-
-
-});
+console.log(
+    "Closet da Atlética FSA carregado com sucesso."
+);
