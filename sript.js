@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let rotacao = 0;
     let posicaoX = 0;
     let posicaoY = 0;
+
     let roupaAtual = null;
 
     let arrastando = false;
@@ -21,9 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let inicioPosicaoY = 0;
 
 
-    /* =========================================
-       FOTO
-    ========================================= */
+    /* =========================
+       ESCOLHER FOTO
+    ========================= */
 
     photoInput.addEventListener("change", function () {
 
@@ -33,48 +34,61 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        console.log("Foto escolhida:", arquivo.name);
+        console.log("Tipo da imagem:", arquivo.type);
+
         if (!arquivo.type.startsWith("image/")) {
             alert("Escolha uma imagem válida.");
             return;
         }
 
-        const leitor = new FileReader();
+        /*
+        Cria uma URL temporária para a imagem.
+        Isso funciona melhor no celular do que depender
+        apenas do FileReader.
+        */
 
-        leitor.onload = function (evento) {
+        const url = URL.createObjectURL(arquivo);
 
-            userPhoto.src = evento.target.result;
+        userPhoto.onload = function () {
 
-            userPhoto.onload = function () {
+            console.log("FOTO CARREGADA COM SUCESSO!");
 
-                userPhoto.style.display = "block";
+            userPhoto.style.display = "block";
+            viewerMessage.style.display = "none";
 
-                viewerMessage.style.display = "none";
+            photoStatus.textContent =
+                "✓ FOTO CARREGADA COM SUCESSO";
 
-                photoStatus.textContent =
-                    "✓ FOTO CARREGADA COM SUCESSO";
-
-            };
-
+            URL.revokeObjectURL(url);
         };
 
-        leitor.onerror = function () {
+        userPhoto.onerror = function () {
 
-            alert("Não foi possível carregar essa foto.");
+            console.error("Não foi possível carregar a imagem.");
 
+            alert(
+                "Não consegui abrir essa foto.\n\n" +
+                "Tente escolher uma foto em JPG ou PNG."
+            );
+
+            URL.revokeObjectURL(url);
         };
 
-        leitor.readAsDataURL(arquivo);
-
+        userPhoto.src = url;
     });
 
 
-    /* =========================================
+    /* =========================
        ESCOLHER ROUPA
-    ========================================= */
+    ========================= */
 
     window.selecionarRoupa = function (caminho, nome) {
 
-        if (!userPhoto.src || userPhoto.style.display !== "block") {
+        if (
+            !userPhoto.src ||
+            userPhoto.style.display !== "block"
+        ) {
 
             alert("Primeiro escolha uma foto sua.");
 
@@ -96,18 +110,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
         clothingOverlay.onload = function () {
 
+            console.log("Roupa carregada:", nome);
+
             clothingOverlay.style.display = "block";
 
             atualizarRoupa();
-
         };
 
         clothingOverlay.onerror = function () {
 
             alert(
-                "Não consegui carregar esta peça. Confira o nome da imagem dentro da pasta assets."
+                "Não consegui carregar esta peça.\n\n" +
+                "Confira se a imagem está dentro da pasta assets."
             );
-
         };
 
         clothingOverlay.src = caminho;
@@ -115,13 +130,12 @@ document.addEventListener("DOMContentLoaded", () => {
         selectedProduct.textContent = nome;
 
         buyButton.disabled = false;
-
     };
 
 
-    /* =========================================
+    /* =========================
        ATUALIZAR ROUPA
-    ========================================= */
+    ========================= */
 
     function atualizarRoupa() {
 
@@ -138,44 +152,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
         clothingOverlay.style.transform =
             `translate(-50%, -50%) rotate(${rotacao}deg)`;
-
     }
 
 
-    /* =========================================
-       AUMENTAR
-    ========================================= */
+    /* =========================
+       AUMENTAR ROUPA
+    ========================= */
 
     window.aumentarRoupa = function () {
 
         if (!roupaAtual) {
-
-            alert("Escolha uma peça primeiro.");
-
             return;
         }
 
         escala += 0.1;
 
-        if (escala > 2.5) {
-            escala = 2.5;
+        if (escala > 2) {
+            escala = 2;
         }
 
         atualizarRoupa();
-
     };
 
 
-    /* =========================================
-       DIMINUIR
-    ========================================= */
+    /* =========================
+       DIMINUIR ROUPA
+    ========================= */
 
     window.diminuirRoupa = function () {
 
         if (!roupaAtual) {
-
-            alert("Escolha uma peça primeiro.");
-
             return;
         }
 
@@ -186,44 +192,32 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         atualizarRoupa();
-
     };
 
 
-    /* =========================================
-       GIRAR
-    ========================================= */
+    /* =========================
+       GIRAR ROUPA
+    ========================= */
 
     window.girarRoupa = function () {
 
         if (!roupaAtual) {
-
-            alert("Escolha uma peça primeiro.");
-
             return;
         }
 
         rotacao += 15;
 
-        if (rotacao >= 360) {
-            rotacao = 0;
-        }
-
         atualizarRoupa();
-
     };
 
 
-    /* =========================================
-       RESET
-    ========================================= */
+    /* =========================
+       RESETAR ROUPA
+    ========================= */
 
     window.resetarRoupa = function () {
 
         if (!roupaAtual) {
-
-            alert("Escolha uma peça primeiro.");
-
             return;
         }
 
@@ -233,13 +227,12 @@ document.addEventListener("DOMContentLoaded", () => {
         posicaoY = 0;
 
         atualizarRoupa();
-
     };
 
 
-    /* =========================================
+    /* =========================
        ARRASTAR ROUPA
-    ========================================= */
+    ========================= */
 
     clothingOverlay.addEventListener(
         "pointerdown",
@@ -261,11 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 evento.pointerId
             );
 
-            clothingOverlay.style.cursor =
-                "grabbing";
-
-            evento.preventDefault();
-
+            clothingOverlay.style.cursor = "grabbing";
         }
     );
 
@@ -278,29 +267,34 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            const movimentoX =
+                evento.clientX - inicioX;
+
+            const movimentoY =
+                evento.clientY - inicioY;
+
             posicaoX =
-                inicioPosicaoX +
-                (evento.clientX - inicioX);
+                inicioPosicaoX + movimentoX;
 
             posicaoY =
-                inicioPosicaoY +
-                (evento.clientY - inicioY);
+                inicioPosicaoY + movimentoY;
 
             atualizarRoupa();
-
         }
     );
 
 
     clothingOverlay.addEventListener(
         "pointerup",
-        function () {
+        function (evento) {
 
             arrastando = false;
 
-            clothingOverlay.style.cursor =
-                "grab";
+            clothingOverlay.releasePointerCapture(
+                evento.pointerId
+            );
 
+            clothingOverlay.style.cursor = "grab";
         }
     );
 
@@ -311,16 +305,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             arrastando = false;
 
-            clothingOverlay.style.cursor =
-                "grab";
-
+            clothingOverlay.style.cursor = "grab";
         }
     );
 
 
-    /* =========================================
-       IR PARA CLOSET
-    ========================================= */
+    /* =========================
+       IR PARA O CLOSET
+    ========================= */
 
     window.irParaCloset = function () {
 
@@ -329,13 +321,12 @@ document.addEventListener("DOMContentLoaded", () => {
             .scrollIntoView({
                 behavior: "smooth"
             });
-
     };
 
 
-    /* =========================================
-       COMPRAR
-    ========================================= */
+    /* =========================
+       COMPRAR LOOK
+    ========================= */
 
     window.comprarLook = function () {
 
@@ -349,9 +340,13 @@ document.addEventListener("DOMContentLoaded", () => {
         alert(
             "Você escolheu: " +
             roupaAtual +
-            "\n\nEm breve vamos conectar este botão ao sistema de pedidos da Atlética! 🚀"
+            "\n\n" +
+            "Em breve vamos conectar este botão " +
+            "ao sistema de pedidos da Atlética! 🚀"
         );
-
     };
+
+
+    console.log("CLOSET DIGITAL — JavaScript carregado!");
 
 });
