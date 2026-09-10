@@ -1,468 +1,357 @@
-/* ==================================================
-   CLOSET DIGITAL - ATLÉTICA FSA
-   ================================================== */
+document.addEventListener("DOMContentLoaded", () => {
+
+    const photoInput = document.getElementById("photoInput");
+    const userPhoto = document.getElementById("userPhoto");
+    const clothingOverlay = document.getElementById("clothingOverlay");
+    const photoStatus = document.getElementById("photoStatus");
+    const viewerMessage = document.getElementById("viewerMessage");
+    const selectedProduct = document.getElementById("selectedProduct");
+    const buyButton = document.getElementById("buyButton");
+
+    let escala = 1;
+    let rotacao = 0;
+    let posicaoX = 0;
+    let posicaoY = 0;
+    let roupaAtual = null;
+
+    let arrastando = false;
+    let inicioX = 0;
+    let inicioY = 0;
+    let inicioPosicaoX = 0;
+    let inicioPosicaoY = 0;
 
 
-/* ================= VARIÁVEIS ================= */
+    /* =========================================
+       FOTO
+    ========================================= */
 
-let escala = 1;
-let rotacao = 0;
+    photoInput.addEventListener("change", function () {
 
-let posicaoX = 0;
-let posicaoY = 0;
-
-let roupaAtual = null;
-
-let arrastando = false;
-
-let inicioMouseX = 0;
-let inicioMouseY = 0;
-
-let inicioPosicaoX = 0;
-let inicioPosicaoY = 0;
-
-
-/* ================= ELEMENTOS ================= */
-
-let photoInput;
-let userPhoto;
-let clothingOverlay;
-let photoStatus;
-let viewerMessage;
-let selectedProduct;
-let buyButton;
-
-
-/* ================= INICIALIZAÇÃO ================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    photoInput = document.getElementById("photoInput");
-    userPhoto = document.getElementById("userPhoto");
-    clothingOverlay = document.getElementById("clothingOverlay");
-    photoStatus = document.getElementById("photoStatus");
-    viewerMessage = document.getElementById("viewerMessage");
-    selectedProduct = document.getElementById("selectedProduct");
-    buyButton = document.getElementById("buyButton");
-
-
-    /* ================= UPLOAD DA FOTO ================= */
-
-    photoInput.addEventListener("change", function (event) {
-
-        const arquivo = event.target.files[0];
+        const arquivo = this.files[0];
 
         if (!arquivo) {
             return;
         }
 
-
         if (!arquivo.type.startsWith("image/")) {
+            alert("Escolha uma imagem válida.");
+            return;
+        }
 
-            alert("Por favor, escolha uma imagem.");
+        const leitor = new FileReader();
+
+        leitor.onload = function (evento) {
+
+            userPhoto.src = evento.target.result;
+
+            userPhoto.onload = function () {
+
+                userPhoto.style.display = "block";
+
+                viewerMessage.style.display = "none";
+
+                photoStatus.textContent =
+                    "✓ FOTO CARREGADA COM SUCESSO";
+
+            };
+
+        };
+
+        leitor.onerror = function () {
+
+            alert("Não foi possível carregar essa foto.");
+
+        };
+
+        leitor.readAsDataURL(arquivo);
+
+    });
+
+
+    /* =========================================
+       ESCOLHER ROUPA
+    ========================================= */
+
+    window.selecionarRoupa = function (caminho, nome) {
+
+        if (!userPhoto.src || userPhoto.style.display !== "block") {
+
+            alert("Primeiro escolha uma foto sua.");
+
+            document
+                .getElementById("closet")
+                .scrollIntoView({
+                    behavior: "smooth"
+                });
 
             return;
         }
 
+        roupaAtual = nome;
 
-        const url = URL.createObjectURL(arquivo);
+        escala = 1;
+        rotacao = 0;
+        posicaoX = 0;
+        posicaoY = 0;
 
-        userPhoto.src = url;
+        clothingOverlay.onload = function () {
 
-        userPhoto.style.display = "block";
+            clothingOverlay.style.display = "block";
 
-        viewerMessage.style.display = "none";
+            atualizarRoupa();
+
+        };
+
+        clothingOverlay.onerror = function () {
+
+            alert(
+                "Não consegui carregar esta peça. Confira o nome da imagem dentro da pasta assets."
+            );
+
+        };
+
+        clothingOverlay.src = caminho;
+
+        selectedProduct.textContent = nome;
+
+        buyButton.disabled = false;
+
+    };
 
 
-        photoStatus.textContent =
-            "✓ Foto selecionada com sucesso";
+    /* =========================================
+       ATUALIZAR ROUPA
+    ========================================= */
+
+    function atualizarRoupa() {
+
+        const tamanho = 300 * escala;
+
+        clothingOverlay.style.width =
+            tamanho + "px";
+
+        clothingOverlay.style.left =
+            `calc(50% + ${posicaoX}px)`;
+
+        clothingOverlay.style.top =
+            `calc(50% + ${posicaoY}px)`;
+
+        clothingOverlay.style.transform =
+            `translate(-50%, -50%) rotate(${rotacao}deg)`;
+
+    }
 
 
-        photoStatus.style.color = "#f5c928";
+    /* =========================================
+       AUMENTAR
+    ========================================= */
+
+    window.aumentarRoupa = function () {
+
+        if (!roupaAtual) {
+
+            alert("Escolha uma peça primeiro.");
+
+            return;
+        }
+
+        escala += 0.1;
+
+        if (escala > 2.5) {
+            escala = 2.5;
+        }
+
+        atualizarRoupa();
+
+    };
 
 
-        /* Permite escolher outra roupa */
-        document.querySelectorAll(".clothing-button")
-            .forEach(function (button) {
+    /* =========================================
+       DIMINUIR
+    ========================================= */
 
-                button.style.opacity = "1";
+    window.diminuirRoupa = function () {
 
-            });
+        if (!roupaAtual) {
 
-    });
+            alert("Escolha uma peça primeiro.");
+
+            return;
+        }
+
+        escala -= 0.1;
+
+        if (escala < 0.4) {
+            escala = 0.4;
+        }
+
+        atualizarRoupa();
+
+    };
 
 
-    /* ================= DRAG DA ROUPA ================= */
+    /* =========================================
+       GIRAR
+    ========================================= */
+
+    window.girarRoupa = function () {
+
+        if (!roupaAtual) {
+
+            alert("Escolha uma peça primeiro.");
+
+            return;
+        }
+
+        rotacao += 15;
+
+        if (rotacao >= 360) {
+            rotacao = 0;
+        }
+
+        atualizarRoupa();
+
+    };
+
+
+    /* =========================================
+       RESET
+    ========================================= */
+
+    window.resetarRoupa = function () {
+
+        if (!roupaAtual) {
+
+            alert("Escolha uma peça primeiro.");
+
+            return;
+        }
+
+        escala = 1;
+        rotacao = 0;
+        posicaoX = 0;
+        posicaoY = 0;
+
+        atualizarRoupa();
+
+    };
+
+
+    /* =========================================
+       ARRASTAR ROUPA
+    ========================================= */
 
     clothingOverlay.addEventListener(
         "pointerdown",
-        iniciarArraste
+        function (evento) {
+
+            if (!roupaAtual) {
+                return;
+            }
+
+            arrastando = true;
+
+            inicioX = evento.clientX;
+            inicioY = evento.clientY;
+
+            inicioPosicaoX = posicaoX;
+            inicioPosicaoY = posicaoY;
+
+            clothingOverlay.setPointerCapture(
+                evento.pointerId
+            );
+
+            clothingOverlay.style.cursor =
+                "grabbing";
+
+            evento.preventDefault();
+
+        }
     );
 
-
-    document.addEventListener(
-        "pointermove",
-        moverRoupa
-    );
-
-
-    document.addEventListener(
-        "pointerup",
-        terminarArraste
-    );
-
-
-    /* ================= EVITAR DRAG PADRÃO ================= */
 
     clothingOverlay.addEventListener(
-        "dragstart",
-        function (event) {
-            event.preventDefault();
+        "pointermove",
+        function (evento) {
+
+            if (!arrastando) {
+                return;
+            }
+
+            posicaoX =
+                inicioPosicaoX +
+                (evento.clientX - inicioX);
+
+            posicaoY =
+                inicioPosicaoY +
+                (evento.clientY - inicioY);
+
+            atualizarRoupa();
+
         }
     );
 
-});
+
+    clothingOverlay.addEventListener(
+        "pointerup",
+        function () {
+
+            arrastando = false;
+
+            clothingOverlay.style.cursor =
+                "grab";
+
+        }
+    );
 
 
-/* ==================================================
-   ESCOLHER ROUPA
-   ================================================== */
+    clothingOverlay.addEventListener(
+        "pointercancel",
+        function () {
 
-function selecionarRoupa(caminho, nome) {
+            arrastando = false;
 
-    /* Se não tiver foto */
-    if (!userPhoto || userPhoto.style.display !== "block") {
+            clothingOverlay.style.cursor =
+                "grab";
 
-        alert(
-            "Primeiro escolha uma foto sua para experimentar a peça."
-        );
+        }
+    );
 
-        const closet =
-            document.getElementById("closet");
 
-        if (closet) {
-            closet.scrollIntoView({
+    /* =========================================
+       IR PARA CLOSET
+    ========================================= */
+
+    window.irParaCloset = function () {
+
+        document
+            .getElementById("closet")
+            .scrollIntoView({
                 behavior: "smooth"
             });
+
+    };
+
+
+    /* =========================================
+       COMPRAR
+    ========================================= */
+
+    window.comprarLook = function () {
+
+        if (!roupaAtual) {
+
+            alert("Escolha uma peça primeiro.");
+
+            return;
         }
 
-        return;
-    }
-
-
-    roupaAtual = nome;
-
-
-    escala = 1;
-    rotacao = 0;
-
-    posicaoX = 0;
-    posicaoY = 0;
-
-
-    clothingOverlay.src = caminho;
-
-    clothingOverlay.style.display = "block";
-
-
-    selectedProduct.textContent = nome;
-
-    buyButton.disabled = false;
-
-
-    atualizarRoupa();
-
-
-    /* Marca botão selecionado */
-
-    document.querySelectorAll(".clothing-button")
-        .forEach(function (button) {
-
-            button.classList.remove("selected");
-
-        });
-
-
-    /* Pequeno feedback */
-
-    console.log("Roupa selecionada:", nome);
-}
-
-
-/* ==================================================
-   ATUALIZAR ROUPA
-   ================================================== */
-
-function atualizarRoupa() {
-
-    if (!clothingOverlay) {
-        return;
-    }
-
-
-    const larguraBase = 300;
-
-    const novaLargura =
-        larguraBase * escala;
-
-
-    clothingOverlay.style.width =
-        novaLargura + "px";
-
-
-    clothingOverlay.style.left =
-        `calc(50% + ${posicaoX}px)`;
-
-
-    clothingOverlay.style.top =
-        `calc(50% + ${posicaoY}px)`;
-
-
-    clothingOverlay.style.transform =
-        `translate(-50%, -50%) rotate(${rotacao}deg)`;
-}
-
-
-/* ==================================================
-   AUMENTAR
-   ================================================== */
-
-function aumentarRoupa() {
-
-    if (!roupaAtual) {
-
         alert(
-            "Escolha uma peça primeiro."
+            "Você escolheu: " +
+            roupaAtual +
+            "\n\nEm breve vamos conectar este botão ao sistema de pedidos da Atlética! 🚀"
         );
 
-        return;
-    }
+    };
 
-
-    escala += 0.1;
-
-
-    if (escala > 2.5) {
-        escala = 2.5;
-    }
-
-
-    atualizarRoupa();
-}
-
-
-/* ==================================================
-   DIMINUIR
-   ================================================== */
-
-function diminuirRoupa() {
-
-    if (!roupaAtual) {
-
-        alert(
-            "Escolha uma peça primeiro."
-        );
-
-        return;
-    }
-
-
-    escala -= 0.1;
-
-
-    if (escala < 0.4) {
-        escala = 0.4;
-    }
-
-
-    atualizarRoupa();
-}
-
-
-/* ==================================================
-   GIRAR
-   ================================================== */
-
-function girarRoupa() {
-
-    if (!roupaAtual) {
-
-        alert(
-            "Escolha uma peça primeiro."
-        );
-
-        return;
-    }
-
-
-    rotacao += 15;
-
-
-    if (rotacao >= 360) {
-        rotacao = 0;
-    }
-
-
-    atualizarRoupa();
-}
-
-
-/* ==================================================
-   RESETAR
-   ================================================== */
-
-function resetarRoupa() {
-
-    if (!roupaAtual) {
-
-        alert(
-            "Escolha uma peça primeiro."
-        );
-
-        return;
-    }
-
-
-    escala = 1;
-
-    rotacao = 0;
-
-    posicaoX = 0;
-
-    posicaoY = 0;
-
-
-    atualizarRoupa();
-}
-
-
-/* ==================================================
-   ARRASTAR - INÍCIO
-   ================================================== */
-
-function iniciarArraste(event) {
-
-    if (!roupaAtual) {
-        return;
-    }
-
-
-    arrastando = true;
-
-
-    inicioMouseX = event.clientX;
-
-    inicioMouseY = event.clientY;
-
-
-    inicioPosicaoX = posicaoX;
-
-    inicioPosicaoY = posicaoY;
-
-
-    clothingOverlay.setPointerCapture(
-        event.pointerId
-    );
-
-
-    clothingOverlay.style.cursor =
-        "grabbing";
-
-
-    event.preventDefault();
-}
-
-
-/* ==================================================
-   ARRASTAR - MOVIMENTO
-   ================================================== */
-
-function moverRoupa(event) {
-
-    if (!arrastando) {
-        return;
-    }
-
-
-    const movimentoX =
-        event.clientX - inicioMouseX;
-
-
-    const movimentoY =
-        event.clientY - inicioMouseY;
-
-
-    posicaoX =
-        inicioPosicaoX + movimentoX;
-
-
-    posicaoY =
-        inicioPosicaoY + movimentoY;
-
-
-    atualizarRoupa();
-}
-
-
-/* ==================================================
-   ARRASTAR - FINAL
-   ================================================== */
-
-function terminarArraste() {
-
-    if (!arrastando) {
-        return;
-    }
-
-
-    arrastando = false;
-
-
-    clothingOverlay.style.cursor =
-        "grab";
-}
-
-
-/* ==================================================
-   IR PARA O CLOSET
-   ================================================== */
-
-function irParaCloset() {
-
-    const closet =
-        document.getElementById("closet");
-
-
-    if (!closet) {
-        return;
-    }
-
-
-    closet.scrollIntoView({
-        behavior: "smooth"
-    });
-}
-
-
-/* ==================================================
-   COMPRAR LOOK
-   ================================================== */
-
-function comprarLook() {
-
-    if (!roupaAtual) {
-
-        alert(
-            "Escolha uma peça primeiro."
-        );
-
-        return;
-    }
-
-
-    alert(
-        "Você escolheu: " +
-        roupaAtual +
-        "\n\nEm breve vamos conectar esse botão ao pedido da Atlética! 🚀"
-    );
-}
+});
