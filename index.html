@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Closet da Atlética FSA</title>
+    <title>Closet Digital | Atlética FSA</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -15,18 +16,9 @@
 
     <header class="header">
 
-        <div class="logo-area">
-            <img
-                src="assets/logo.png"
-                alt="Logo da Atlética FSA"
-                class="logo"
-            >
-
-            <div>
-                <span>ATLÉTICA</span>
-                <small>FSA</small>
-            </div>
-        </div>
+        <a href="#inicio" class="logo-area">
+            <img src="assets/logo.png" alt="Atlética FSA">
+        </a>
 
         <nav>
             <a href="#inicio">INÍCIO</a>
@@ -35,512 +27,524 @@
             <a href="#roupas">ROUPAS</a>
         </nav>
 
-        <button
-            class="header-button"
-            onclick="irParaCloset()"
-        >
-            MONTE SEU LOOK →
-        </button>
-
     </header>
 
 
     <!-- ================= HERO ================= -->
 
-    <section class="hero" id="inicio">
+    <main>
 
-        <div class="hero-text">
+        <section class="hero" id="inicio">
 
-            <p class="eyebrow">
-                CLOSET DIGITAL DA ATLÉTICA
-            </p>
+            <div class="hero-content">
 
-            <h1>
-                MONTE SEU LOOK.
-                <strong>
-                    A ATLÉTICA ENTRA COM O RESTO.
-                </strong>
-            </h1>
+                <span class="tag">CLOSET DIGITAL</span>
 
-            <p class="hero-description">
-                Escolha suas peças oficiais, monte sua combinação
-                e veja como ficaria antes de comprar.
-            </p>
+                <h1>
+                    MONTE SEU<br>
+                    <span>LOOK FSA.</span>
+                </h1>
 
-            <button
-                class="main-button"
-                onclick="irParaCloset()"
-            >
-                COMEÇAR AGORA →
-            </button>
-
-        </div>
-
-        <div class="hero-decoration">
-            <span>FSA</span>
-        </div>
-
-    </section>
-
-
-    <!-- ================= COMO FUNCIONA ================= -->
-
-    <section
-        class="how-section"
-        id="como-funciona"
-    >
-
-        <div class="section-title">
-
-            <p>COMO FUNCIONA?</p>
-
-            <h2>
-                É simples, rápido
-                <span>e do seu jeito.</span>
-            </h2>
-
-        </div>
-
-
-        <div class="steps">
-
-            <div class="step">
-                <span>01</span>
-                <h3>Escolha sua foto</h3>
                 <p>
-                    Tire uma foto da parte de baixo
-                    do seu corpo e/ou acessórios.
+                    Coloque sua foto, escolha uma peça e experimente
+                    virtualmente os produtos da Atlética FSA.
                 </p>
+
+                <a href="#closet" class="btn-primary">
+                    EXPERIMENTAR AGORA →
+                </a>
+
             </div>
 
-            <div class="step">
-                <span>02</span>
-                <h3>Entre no closet</h3>
-                <p>
-                    Navegue pelas peças oficiais
-                    da Atlética.
-                </p>
+        </section>
+
+
+        <!-- ================= COMO FUNCIONA ================= -->
+
+        <section class="section" id="como-funciona">
+
+            <div class="section-title">
+
+                <span>COMO FUNCIONA</span>
+
+                <h2>
+                    É simples.
+                </h2>
+
             </div>
 
-            <div class="step">
-                <span>03</span>
-                <h3>Monte seu look</h3>
-                <p>
-                    Combine as peças e veja
-                    como fica no seu estilo.
-                </p>
+
+            <div class="steps">
+
+                <div class="step">
+
+                    <strong>01</strong>
+
+                    <h3>ENVIE SUA FOTO</h3>
+
+                    <p>
+                        Adicione uma foto sua. Não precisa ser de corpo inteiro:
+                        pode ser uma foto mostrando a parte do corpo onde você
+                        quer visualizar a peça.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <strong>02</strong>
+
+                    <h3>ESCOLHA SUA PEÇA</h3>
+
+                    <p>
+                        Escolha entre as peças disponíveis da Atlética FSA
+                        e coloque a roupa sobre a sua foto.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <strong>03</strong>
+
+                    <h3>MONTE SEU LOOK</h3>
+
+                    <p>
+                        Arraste, aumente, diminua e gire a peça até encontrar
+                        a posição perfeita.
+                    </p>
+
+                </div>
+
             </div>
 
-            <div class="step">
-                <span>04</span>
-                <h3>Compre</h3>
-                <p>
-                    Gostou? Finalize seu pedido
-                    e vista a Atlética.
-                </p>
+        </section>
+
+
+        <!-- ================= CLOSET ================= -->
+
+        <section class="closet-section" id="closet">
+
+            <div class="section-title">
+
+                <span>PROVADOR VIRTUAL</span>
+
+                <h2>
+                    MONTE SEU LOOK.
+                </h2>
+
             </div>
 
-        </div>
 
-    </section>
-
-
-    <!-- ================= CLOSET ================= -->
-
-    <section
-        class="closet-section"
-        id="closet"
-    >
-
-        <div class="closet-title">
-
-            <p>CLOSET DIGITAL</p>
-
-            <h2>
-                MONTE SEU
-                <span>LOOK FSA.</span>
-            </h2>
-
-            <p>
-                Coloque sua foto, escolha uma peça
-                e experimente virtualmente.
-            </p>
-
-        </div>
+            <div class="closet-layout">
 
 
-        <div class="closet-container">
+                <!-- PAINEL -->
+
+                <aside class="controls-panel">
 
 
-            <!-- ===== FOTO ===== -->
+                    <!-- FOTO -->
 
-            <aside class="photo-panel">
+                    <div class="control-box">
 
-                <h3>1. SUA FOTO</h3>
+                        <h3>1. SUA FOTO</h3>
 
-                <p>
-                    Adicione uma foto da parte de baixo
-                    do seu corpo ou dos seus acessórios.
-                </p>
-
-
-                <!-- INPUT REAL -->
-
-                <input
-                    type="file"
-                    id="photoInput"
-                    accept="image/*"
-                    hidden
-                >
+                        <p>
+                            Adicione uma foto da parte do seu corpo
+                            que deseja usar no provador.
+                        </p>
 
 
-                <!-- ÁREA CLICÁVEL -->
+                        <input
+                            type="file"
+                            id="photoInput"
+                            accept="image/*"
+                            hidden
+                        >
 
-                <label
-                    for="photoInput"
-                    class="upload-area"
-                    id="uploadArea"
-                >
 
-                    <div class="upload-icon">
-                        📷
+                        <label
+                            for="photoInput"
+                            class="upload-area"
+                            id="uploadArea"
+                        >
+
+                            <div class="upload-icon">
+                                📷
+                            </div>
+
+                            <strong>
+                                ESCOLHER FOTO
+                            </strong>
+
+                            <span>
+                                Clique aqui para selecionar uma imagem
+                            </span>
+
+                        </label>
+
+
+                        <p
+                            id="photoStatus"
+                            class="photo-status"
+                        >
+                            Nenhuma foto selecionada
+                        </p>
+
                     </div>
 
-                    <strong>
-                        ESCOLHER FOTO
-                    </strong>
 
-                    <span>
-                        Clique aqui para selecionar
-                        uma imagem
-                    </span>
+                    <!-- ROUPAS -->
 
-                </label>
+                    <div class="control-box">
 
+                        <h3>2. ESCOLHA SUA PEÇA</h3>
 
-                <p
-                    id="photoStatus"
-                    class="photo-status"
-                >
-                    Nenhuma foto selecionada
-                </p>
-
-            </aside>
+                        <p>
+                            Selecione uma peça da Atlética FSA.
+                        </p>
 
 
+                        <div class="product-buttons">
 
-            <!-- ===== VISUALIZADOR ===== -->
+                            <button
+                                type="button"
+                                class="product-select"
+                                onclick="selecionarRoupa('assets/camiseta-azul.png', 'Camiseta Azul')"
+                            >
+                                CAMISETA AZUL
+                            </button>
 
-            <main class="viewer-panel">
 
-                <div
-                    class="viewer"
-                    id="viewer"
-                >
+                            <button
+                                type="button"
+                                class="product-select"
+                                onclick="selecionarRoupa('assets/camiseta-branca.png', 'Camiseta Branca')"
+                            >
+                                CAMISETA BRANCA
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="product-select"
+                                onclick="selecionarRoupa('assets/moletom-amarelo.png', 'Moletom Amarelo')"
+                            >
+                                MOLETOM AMARELO
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="product-select"
+                                onclick="selecionarRoupa('assets/moletom-branco.png', 'Moletom Branco')"
+                            >
+                                MOLETOM BRANCO
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="product-select"
+                                onclick="selecionarRoupa('assets/moletom-preto.png', 'Moletom Preto')"
+                            >
+                                MOLETOM PRETO
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="product-select"
+                                onclick="selecionarRoupa('assets/jaqueta-varsity.png', 'Jaqueta Varsity')"
+                            >
+                                JAQUETA VARSITY
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- AJUSTES -->
+
+                    <div class="control-box">
+
+                        <h3>3. AJUSTE A PEÇA</h3>
+
+                        <p>
+                            Arraste a peça diretamente na foto.
+                        </p>
+
+
+                        <div class="adjust-buttons">
+
+                            <button
+                                type="button"
+                                onclick="diminuirRoupa()"
+                            >
+                                −
+                            </button>
+
+
+                            <button
+                                type="button"
+                                onclick="aumentarRoupa()"
+                            >
+                                +
+                            </button>
+
+
+                            <button
+                                type="button"
+                                onclick="girarRoupa()"
+                            >
+                                ↻
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="reset"
+                                onclick="resetarRoupa()"
+                            >
+                                RESETAR
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+
+                <!-- PROVADOR -->
+
+                <div class="try-on-area">
+
+                    <div class="try-on-header">
+                        SEU PROVADOR
+                    </div>
+
 
                     <div
-                        class="viewer-message"
-                        id="viewerMessage"
+                        class="try-on"
+                        id="viewer"
                     >
-                        Envie uma foto para começar
+
+                        <div
+                            class="empty-message"
+                            id="viewerMessage"
+                        >
+
+                            <div class="empty-icon">
+                                👕
+                            </div>
+
+                            <h3>
+                                Seu look aparecerá aqui
+                            </h3>
+
+                            <p>
+                                Primeiro escolha uma foto.
+                            </p>
+
+                        </div>
+
+
+                        <img
+                            id="userPhoto"
+                            class="user-photo"
+                            alt="Sua foto"
+                        >
+
+
+                        <img
+                            id="clothingOverlay"
+                            class="clothing-overlay"
+                            alt="Roupa selecionada"
+                            draggable="false"
+                        >
+
                     </div>
 
 
-                    <!-- FOTO DO USUÁRIO -->
+                    <div class="selected-info">
 
-                    <img
-                        id="userPhoto"
-                        class="user-photo"
-                        alt="Sua foto"
-                    >
+                        <div>
 
+                            <span class="selected-label">
+                                PEÇA SELECIONADA
+                            </span>
 
-                    <!-- ROUPA FLUTUANTE -->
+                            <div id="selectedProduct">
+                                Nenhuma peça selecionada
+                            </div>
 
-                    <img
-                        id="clothingOverlay"
-                        class="clothing-overlay"
-                        alt="Roupa selecionada"
-                    >
-
-                </div>
+                        </div>
 
 
-                <!-- CONTROLES -->
-
-                <div class="controls">
-
-                    <button
-                        type="button"
-                        onclick="diminuirRoupa()"
-                    >
-                        −
-                    </button>
-
-                    <button
-                        type="button"
-                        onclick="aumentarRoupa()"
-                    >
-                        +
-                    </button>
-
-                    <button
-                        type="button"
-                        onclick="girarRoupa()"
-                    >
-                        ↻
-                    </button>
-
-                    <button
-                        type="button"
-                        onclick="resetarRoupa()"
-                    >
-                        RESETAR
-                    </button>
-
-                </div>
-
-                <p class="drag-info">
-                    Arraste a roupa para posicionar
-                </p>
-
-            </main>
-
-
-
-            <!-- ===== ROUPAS ===== -->
-
-            <aside
-                class="clothing-panel"
-                id="roupas"
-            >
-
-                <h3>
-                    2. ESCOLHA SUA PEÇA
-                </h3>
-
-                <p>
-                    Peças oficiais da Atlética FSA
-                </p>
-
-
-                <div class="clothing-grid">
-
-
-                    <!-- CAMISETA AZUL -->
-
-                    <button
-                        type="button"
-                        class="clothing-card"
-                        onclick="selecionarRoupa(
-                            'assets/camiseta-azul.png',
-                            'Camiseta Azul'
-                        )"
-                    >
-
-                        <img
-                            src="assets/camiseta-azul.jpg"
-                            alt="Camiseta Azul"
+                        <button
+                            type="button"
+                            class="buy-button"
+                            id="buyButton"
+                            onclick="comprarLook()"
+                            disabled
                         >
+                            QUERO ESSE LOOK →
+                        </button>
 
-                        <strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ROUPAS ================= -->
+
+        <section
+            class="section products-section"
+            id="roupas"
+        >
+
+            <div class="section-title">
+
+                <span>COLEÇÃO FSA</span>
+
+                <h2>
+                    NOSSAS PEÇAS.
+                </h2>
+
+            </div>
+
+
+            <div class="product-grid">
+
+
+                <div class="product-card">
+
+                    <img
+                        src="assets/camiseta-azul.png"
+                        alt="Camiseta Azul"
+                    >
+
+                    <div class="product-card-content">
+
+                        <h3>
                             Camiseta Azul
-                        </strong>
+                        </h3>
 
-                        <span>
-                            R$ 79,90
-                        </span>
+                        <p>
+                            Modelo oficial da Atlética FSA.
+                        </p>
 
-                    </button>
-
-
-
-                    <!-- CAMISETA BRANCA -->
-
-                    <button
-                        type="button"
-                        class="clothing-card"
-                        onclick="selecionarRoupa(
-                            'assets/camiseta-branca.png',
-                            'Camiseta Branca'
-                        )"
-                    >
-
-                        <img
-                            src="assets/camiseta-branca.jpg"
-                            alt="Camiseta Branca"
+                        <button
+                            type="button"
+                            class="choose-product"
+                            onclick="selecionarRoupa('assets/camiseta-azul.png', 'Camiseta Azul'); irParaCloset();"
                         >
+                            EXPERIMENTAR
+                        </button>
 
-                        <strong>
-                            Camiseta Branca
-                        </strong>
-
-                        <span>
-                            R$ 79,90
-                        </span>
-
-                    </button>
-
-
-
-                    <!-- MOLETOM AMARELO -->
-
-                    <button
-                        type="button"
-                        class="clothing-card"
-                        onclick="selecionarRoupa(
-                            'assets/moletom-amarelo.png',
-                            'Moletom Amarelo'
-                        )"
-                    >
-
-                        <img
-                            src="assets/moletom-amarelo.jpg"
-                            alt="Moletom Amarelo"
-                        >
-
-                        <strong>
-                            Moletom Amarelo
-                        </strong>
-
-                        <span>
-                            R$ 129,90
-                        </span>
-
-                    </button>
-
-
-
-                    <!-- MOLETOM BRANCO -->
-
-                    <button
-                        type="button"
-                        class="clothing-card"
-                        onclick="selecionarRoupa(
-                            'assets/moletom-branco.png',
-                            'Moletom Branco'
-                        )"
-                    >
-
-                        <img
-                            src="assets/moletom-branco.jpg"
-                            alt="Moletom Branco"
-                        >
-
-                        <strong>
-                            Moletom Branco
-                        </strong>
-
-                        <span>
-                            R$ 129,90
-                        </span>
-
-                    </button>
-
-
-
-                    <!-- MOLETOM PRETO -->
-
-                    <button
-                        type="button"
-                        class="clothing-card"
-                        onclick="selecionarRoupa(
-                            'assets/moletom-preto.png',
-                            'Moletom Preto'
-                        )"
-                    >
-
-                        <img
-                            src="assets/moletom-preto.jpg"
-                            alt="Moletom Preto"
-                        >
-
-                        <strong>
-                            Moletom Preto
-                        </strong>
-
-                        <span>
-                            R$ 129,90
-                        </span>
-
-                    </button>
-
-
-
-                    <!-- JAQUETA -->
-
-                    <button
-                        type="button"
-                        class="clothing-card"
-                        onclick="selecionarRoupa(
-                            'assets/jaqueta-varsity.png',
-                            'Jaqueta Varsity'
-                        )"
-                    >
-
-                        <img
-                            src="assets/jaqueta-varsity.jpg"
-                            alt="Jaqueta Varsity"
-                        >
-
-                        <strong>
-                            Jaqueta Varsity
-                        </strong>
-
-                        <span>
-                            R$ 179,90
-                        </span>
-
-                    </button>
+                    </div>
 
                 </div>
 
-            </aside>
 
-        </div>
+                <div class="product-card">
+
+                    <img
+                        src="assets/camiseta-branca.png"
+                        alt="Camiseta Branca"
+                    >
+
+                    <div class="product-card-content">
+
+                        <h3>
+                            Camiseta Branca
+                        </h3>
+
+                        <p>
+                            Modelo oficial da Atlética FSA.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="choose-product"
+                            onclick="selecionarRoupa('assets/camiseta-branca.png', 'Camiseta Branca'); irParaCloset();"
+                        >
+                            EXPERIMENTAR
+                        </button>
+
+                    </div>
+
+                </div>
 
 
-        <!-- ===== RESULTADO ===== -->
+                <div class="product-card">
 
-        <div class="result-area">
+                    <img
+                        src="assets/moletom-preto.png"
+                        alt="Moletom Preto"
+                    >
+
+                    <div class="product-card-content">
+
+                        <h3>
+                            Moletom Preto
+                        </h3>
+
+                        <p>
+                            Modelo oficial da Atlética FSA.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="choose-product"
+                            onclick="selecionarRoupa('assets/moletom-preto.png', 'Moletom Preto'); irParaCloset();"
+                        >
+                            EXPERIMENTAR
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= CTA ================= -->
+
+        <section class="final-cta">
+
+            <img
+                src="assets/logo.png"
+                alt="Atlética FSA"
+            >
 
             <h2>
-                SEU LOOK
+                VISTA<br>
+                A FSA.
             </h2>
 
-            <p id="selectedClothing">
-                Nenhuma peça selecionada
-            </p>
-
-            <button
-                type="button"
-                class="buy-button"
-                onclick="comprarLook()"
+            <a
+                href="#closet"
+                class="btn-primary"
             >
-                QUERO ESSE LOOK →
-            </button>
+                MONTAR MEU LOOK →
+            </a>
 
-        </div>
+        </section>
 
-    </section>
-
-
-
-    <!-- ================= FINAL ================= -->
-
-    <section class="final-section">
-
-        <p>
-            VISTA A ATLÉTICA
-        </p>
-
-        <h2>
-            SEU ESTILO
-            <span>TAMBÉM É FSA.</span>
-        </h2>
-
-    </section>
-
+    </main>
 
 
     <!-- ================= FOOTER ================= -->
@@ -559,11 +563,9 @@
 
     </footer>
 
-<script>
-alert("O INDEX ESTÁ FUNCIONANDO!");
-</script>
 
-<script src="./script.js?v=2"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
