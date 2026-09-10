@@ -851,3 +851,73 @@ footer p {
     }
 
 }
+/* =====================================
+   ÁREA DE UPLOAD DA FOTO
+===================================== */
+
+.upload-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 120px;
+
+    padding: 20px;
+
+    background: var(--yellow);
+    color: var(--navy);
+
+    text-align: center;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    border-radius: 3px;
+
+    transition: 0.2s;
+
+    position: relative;
+    z-index: 20;
+}
+
+.upload-area:hover {
+    transform: translateY(-2px);
+    background: #ffd83d;
+}
+
+.upload-area:active {
+    transform: translateY(0);
+}
+
+.upload-area .upload-icon {
+    font-size: 35px;
+    margin-bottom: 8px;
+}
+
+.upload-area strong {
+    display: block;
+    font-size: 16px;
+}
+
+.upload-area span {
+    display: block;
+    margin-top: 6px;
+
+    font-size: 12px;
+    font-weight: normal;
+    opacity: 0.75;
+}
+
+
+/* STATUS DA FOTO */
+
+.photo-status {
+    margin-top: 12px;
+
+    font-size: 13px;
+
+    color: #bbb;
+}
