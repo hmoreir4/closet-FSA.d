@@ -1,6 +1,6 @@
-/* =========================================
+/* =====================================
    RESET
-========================================= */
+===================================== */
 
 * {
     margin: 0;
@@ -14,1084 +14,840 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: #f4f3ef;
+    background: #f5f3ef;
     color: #0f142e;
-    line-height: 1.5;
-}
-
-button,
-input {
-    font-family: inherit;
-}
-
-button {
-    cursor: pointer;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-}
-
-img {
-    max-width: 100%;
 }
 
 
-
-/* =========================================
-   CORES
-========================================= */
+/* =====================================
+   CORES DA ATLÉTICA
+===================================== */
 
 :root {
-
-    --brown: #4b3e26;
-
-    --yellow: #f5c820;
-
     --navy: #0f142e;
-
+    --yellow: #f5c820;
+    --brown: #4b3e26;
     --purple: #6e637f;
-
     --gray: #afaeab;
-
-    --light: #f4f3ef;
-
     --white: #ffffff;
-
 }
 
 
-
-/* =========================================
+/* =====================================
    HEADER
-========================================= */
+===================================== */
 
 .header {
-
     position: sticky;
-
     top: 0;
-
     z-index: 1000;
 
-    background: var(--navy);
-
-    border-bottom: 3px solid var(--yellow);
-
-}
-
-.header-container {
-
-    width: min(1200px, 92%);
-
-    margin: auto;
-
-    min-height: 82px;
+    height: 80px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
-    gap: 30px;
+    padding: 10px 6%;
 
+    background: var(--navy);
+    border-bottom: 3px solid var(--yellow);
 }
 
 .logo-area {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
+    height: 60px;
 }
 
-.logo {
-
-    width: 58px;
-
-    height: 58px;
-
+.logo-area img {
+    height: 60px;
+    width: auto;
     object-fit: contain;
-
 }
 
-.logo-text {
-
+.header nav {
     display: flex;
+    gap: 30px;
+}
 
-    flex-direction: column;
-
+.header nav a {
     color: white;
-
-}
-
-.logo-text strong {
-
-    color: var(--yellow);
-
-    font-size: 16px;
-
-}
-
-.logo-text span {
-
-    font-size: 10px;
-
-    letter-spacing: 2px;
-
-}
-
-.menu {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 28px;
-
-}
-
-.menu a {
-
-    color: white;
-
-    font-size: 14px;
-
+    text-decoration: none;
     font-weight: bold;
-
-    transition: 0.2s;
-
+    font-size: 14px;
+    transition: 0.3s;
 }
 
-.menu a:hover {
-
+.header nav a:hover {
     color: var(--yellow);
-
 }
 
 
-
-/* =========================================
+/* =====================================
    HERO
-========================================= */
+===================================== */
 
 .hero {
-
-    min-height: 680px;
-
-    background:
-
-        radial-gradient(
-            circle at 80% 30%,
-            rgba(245, 200, 32, 0.18),
-            transparent 35%
-        ),
-
-        var(--navy);
-
-    color: white;
+    min-height: 700px;
 
     display: flex;
-
     align-items: center;
 
-    justify-content: space-between;
+    padding: 80px 8%;
 
-    gap: 50px;
+    background:
+        radial-gradient(
+            circle at 80% 30%,
+            #292e55 0%,
+            var(--navy) 45%,
+            #080b1d 100%
+        );
 
-    padding: 90px 8%;
-
+    color: white;
 }
 
 .hero-content {
-
-    max-width: 650px;
-
+    max-width: 750px;
 }
 
 .tag {
+    display: inline-block;
 
-    color: var(--yellow);
-
-    font-weight: bold;
-
-    letter-spacing: 3px;
-
-    font-size: 12px;
-
-}
-
-.hero h1 {
-
-    font-size: clamp(50px, 8vw, 100px);
-
-    line-height: 0.95;
-
-    margin: 25px 0;
-
-}
-
-.hero h1 span {
-
-    color: var(--yellow);
-
-}
-
-.hero p {
-
-    color: #d8d7d2;
-
-    font-size: 18px;
-
-    max-width: 520px;
-
-    margin-bottom: 30px;
-
-}
-
-.hero-logo {
-
-    width: min(420px, 40vw);
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-}
-
-.hero-logo img {
-
-    width: 100%;
-
-    filter: drop-shadow(
-        0 20px 30px rgba(0, 0, 0, 0.35)
-    );
-
-}
-
-
-
-/* =========================================
-   BUTTONS
-========================================= */
-
-.btn-primary {
-
-    display: inline-flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    min-height: 50px;
-
-    padding: 0 25px;
-
-    background: var(--yellow);
-
-    color: var(--navy);
-
-    border: none;
-
-    font-weight: 900;
-
-    letter-spacing: 1px;
-
-    transition: 0.2s;
-
-}
-
-.btn-primary:hover {
-
-    transform: translateY(-2px);
-
-    filter: brightness(1.05);
-
-}
-
-.btn-secondary {
-
-    min-height: 45px;
-
-    padding: 0 20px;
-
-    background: var(--navy);
-
-    color: white;
-
-    border: 2px solid var(--yellow);
-
-    font-weight: bold;
-
-}
-
-.full {
-
-    width: 100%;
-
-}
-
-
-
-/* =========================================
-   SECTION
-========================================= */
-
-section {
-
-    padding: 100px 8%;
-
-}
-
-.section-title {
-
-    margin-bottom: 50px;
-
-}
-
-.section-title.center {
-
-    text-align: center;
-
-}
-
-.section-title span {
-
-    color: var(--purple);
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    letter-spacing: 3px;
-
-}
-
-.section-title h2 {
-
-    font-size: clamp(36px, 5vw, 65px);
-
-    line-height: 1;
-
-    margin-top: 12px;
-
-}
-
-
-
-/* =========================================
-   COMO FUNCIONA
-========================================= */
-
-.how-section {
-
-    background: var(--light);
-
-}
-
-.steps {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 30px;
-
-}
-
-.step {
-
-    background: white;
-
-    padding: 35px;
-
-    border: 1px solid #ddd;
-
-}
-
-.step-number {
-
-    color: var(--yellow);
-
-    background: var(--navy);
-
-    display: inline-flex;
-
-    padding: 8px 12px;
-
-    font-weight: bold;
+    padding: 8px 15px;
 
     margin-bottom: 25px;
 
-}
-
-.step h3 {
-
-    margin-bottom: 12px;
-
-    font-size: 22px;
-
-}
-
-.step p {
-
-    color: #666;
-
-}
-
-
-
-/* =========================================
-   CLOSET
-========================================= */
-
-.closet-section {
-
-    background: white;
-
-}
-
-.closet-grid {
-
-    width: min(1300px, 100%);
-
-    margin: auto;
-
-    display: grid;
-
-    grid-template-columns:
-        minmax(300px, 390px)
-        1fr;
-
-    gap: 35px;
-
-    align-items: start;
-
-}
-
-.control-panel {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 18px;
-
-}
-
-.control-box {
-
-    background: var(--light);
-
-    padding: 25px;
-
-    border: 1px solid #ddd;
-
-}
-
-.control-box h3 {
-
-    font-size: 18px;
-
-    margin-bottom: 8px;
-
-}
-
-.control-box p {
-
-    color: #666;
-
-    font-size: 14px;
-
-    margin-bottom: 15px;
-
-}
-
-.status {
-
-    margin-top: 12px;
-
-    font-size: 13px;
-
-    color: var(--purple);
-
-}
-
-
-
-/* =========================================
-   ROUPAS BUTTONS
-========================================= */
-
-.clothing-buttons {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 10px;
-
-}
-
-.clothing-button {
-
-    border: 1px solid #ddd;
-
-    background: white;
-
-    overflow: hidden;
-
-    padding: 0;
-
-    text-align: left;
-
-    transition: 0.2s;
-
-}
-
-.clothing-button:hover {
-
-    border-color: var(--yellow);
-
-    transform: translateY(-2px);
-
-}
-
-.clothing-button img {
-
-    width: 100%;
-
-    height: 100px;
-
-    object-fit: cover;
-
-    display: block;
-
-}
-
-.clothing-button span {
-
-    display: block;
-
-    padding: 9px;
-
-    font-size: 10px;
-
-    font-weight: bold;
-
-}
-
-
-
-/* =========================================
-   CONTROLES
-========================================= */
-
-.adjust-buttons {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 6px;
-
-    margin-bottom: 12px;
-
-}
-
-.adjust-buttons button {
-
-    height: 40px;
-
-    background: var(--navy);
-
-    color: white;
-
-    border: none;
-
-    font-size: 18px;
-
-    font-weight: bold;
-
-}
-
-.adjust-buttons button:hover {
-
-    background: var(--purple);
-
-}
-
-
-
-/* =========================================
-   PROVADOR
-========================================= */
-
-.tryon-area {
-
-    min-width: 0;
-
-}
-
-.tryon-header {
-
-    background: var(--navy);
+    border: 1px solid var(--yellow);
 
     color: var(--yellow);
 
-    padding: 15px 20px;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.hero h1 {
+    font-size: clamp(50px, 8vw, 100px);
+    line-height: 0.95;
+
+    margin-bottom: 30px;
+
+    font-weight: 900;
+}
+
+.hero h1 span {
+    color: var(--yellow);
+}
+
+.hero p {
+    max-width: 600px;
+
+    font-size: 20px;
+    line-height: 1.6;
+
+    margin-bottom: 35px;
+
+    color: #ddd;
+}
+
+
+/* =====================================
+   BOTÃO
+===================================== */
+
+.btn-primary {
+    display: inline-block;
+
+    padding: 17px 28px;
+
+    background: var(--yellow);
+    color: var(--navy);
+
+    text-decoration: none;
+
+    font-weight: 900;
+
+    border: none;
+
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.25);
+}
+
+
+/* =====================================
+   SEÇÕES
+===================================== */
+
+.section {
+    padding: 100px 8%;
+}
+
+.section-title {
+    margin-bottom: 50px;
+}
+
+.section-title span {
+    color: var(--brown);
+
+    font-size: 13px;
 
     font-weight: bold;
 
     letter-spacing: 2px;
-
 }
 
-.tryon {
+.section-title h2 {
+    margin-top: 10px;
 
-    position: relative;
+    font-size: clamp(38px, 5vw, 65px);
 
-    width: 100%;
-
-    min-height: 600px;
-
-    background:
-
-        linear-gradient(
-            135deg,
-            #eee 25%,
-            #e4e4e4 25%,
-            #e4e4e4 50%,
-            #eee 50%,
-            #eee 75%,
-            #e4e4e4 75%
-        );
-
-    background-size: 30px 30px;
-
-    overflow: hidden;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-}
-
-.empty-message {
-
-    text-align: center;
-
-    color: #777;
-
-    z-index: 1;
-
-}
-
-.empty-icon {
-
-    width: 70px;
-
-    height: 70px;
-
-    border: 2px dashed var(--gray);
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    margin: auto auto 15px;
-
-    font-size: 30px;
-
-}
-
-.empty-message h3 {
-
-    color: var(--navy);
-
-    margin-bottom: 5px;
-
-}
-
-.user-photo {
-
-    position: absolute;
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: contain;
-
-    display: none;
-
-    z-index: 2;
-
-}
-
-.clothing-layer {
-
-    position: absolute;
-
-    width: 260px;
-
-    height: 320px;
-
-    left: 50%;
-
-    top: 50%;
-
-    transform:
-        translate(-50%, -50%)
-        rotate(0deg)
-        scale(1);
-
-    z-index: 5;
-
-    display: none;
-
-    cursor: grab;
-
-    touch-action: none;
-
-}
-
-.clothing-layer:active {
-
-    cursor: grabbing;
-
-}
-
-.clothing-layer img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: contain;
-
-    display: block;
-
-    pointer-events: none;
-
-    user-select: none;
-
-}
-
-.selected-info {
-
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    padding: 15px 0;
-
-}
-
-.selected-info span {
-
-    color: #777;
-
-}
-
-.selected-info strong {
-
-    color: var(--navy);
-
+    line-height: 1;
 }
 
 
+/* =====================================
+   COMO FUNCIONA
+===================================== */
 
-/* =========================================
-   PRODUTOS
-========================================= */
-
-.products-section {
-
-    background: var(--light);
-
-}
-
-.products-grid {
-
+.steps {
     display: grid;
 
     grid-template-columns:
         repeat(3, 1fr);
 
     gap: 25px;
-
-    max-width: 1300px;
-
-    margin: auto;
-
 }
 
-.product-card {
+.step {
+    padding: 35px;
 
     background: white;
 
-    border: 1px solid #ddd;
+    border-left: 5px solid var(--yellow);
 
-    transition: 0.2s;
-
+    box-shadow:
+        0 10px 30px rgba(0,0,0,0.06);
 }
 
-.product-card:hover {
+.step strong {
+    color: var(--yellow);
 
-    transform: translateY(-5px);
+    font-size: 45px;
 
+    -webkit-text-stroke: 1px var(--navy);
 }
 
-.product-image {
+.step h3 {
+    margin: 20px 0 15px;
 
-    height: 330px;
-
-    overflow: hidden;
-
-    background: #eee;
-
+    font-size: 24px;
 }
 
-.product-image img {
+.step p {
+    color: #666;
 
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
+    line-height: 1.6;
 }
 
-.product-info {
 
-    padding: 22px;
+/* =====================================
+   CLOSET
+===================================== */
 
-}
-
-.product-info span {
-
-    color: var(--purple);
-
-    font-size: 11px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
-
-}
-
-.product-info h3 {
-
-    font-size: 22px;
-
-    margin: 8px 0 18px;
-
-}
-
-.choose-product {
-
-    width: 100%;
-
-    height: 45px;
+.closet-section {
+    padding: 100px 6%;
 
     background: var(--navy);
 
     color: white;
-
-    border: none;
-
-    font-weight: bold;
-
 }
 
-.choose-product:hover {
+.closet-section .section-title span {
+    color: var(--yellow);
+}
+
+.closet-layout {
+    display: grid;
+
+    grid-template-columns:
+        350px 1fr;
+
+    gap: 40px;
+
+    max-width: 1400px;
+
+    margin: auto;
+}
+
+
+/* =====================================
+   PAINEL DE CONTROLE
+===================================== */
+
+.controls-panel {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.control-box {
+    padding: 25px;
+
+    background: #181e3b;
+
+    border: 1px solid #303656;
+}
+
+.control-box h3 {
+    margin-bottom: 10px;
+
+    color: var(--yellow);
+}
+
+.control-box p {
+    margin-bottom: 18px;
+
+    color: #bbb;
+
+    line-height: 1.5;
+}
+
+
+/* =====================================
+   INPUT DE FOTO
+===================================== */
+
+/*
+   O input fica disponível para o navegador,
+   mas invisível visualmente.
+*/
+
+#photoInput {
+    position: absolute;
+
+    width: 1px;
+    height: 1px;
+
+    opacity: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+}
+
+
+/*
+   Esse é o botão que abre
+   a janela para escolher a foto.
+*/
+
+.upload-button {
+    display: block;
+
+    width: 100%;
+
+    padding: 15px;
 
     background: var(--yellow);
 
     color: var(--navy);
 
+    text-align: center;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    border-radius: 3px;
+
+    transition: 0.2s;
+}
+
+.upload-button:hover {
+    transform: translateY(-2px);
+
+    background: #ffd83d;
+}
+
+.status {
+    margin-top: 12px;
+
+    font-size: 13px;
 }
 
 
+/* =====================================
+   BOTÕES DAS ROUPAS
+===================================== */
 
-/* =========================================
-   CTA FINAL
-========================================= */
+.product-buttons {
+    display: grid;
 
-.final-cta {
+    grid-template-columns:
+        repeat(2, 1fr);
 
-    background: var(--navy);
+    gap: 10px;
+}
+
+.product-select {
+    padding: 10px;
+
+    background: #272d4a;
 
     color: white;
 
-    text-align: center;
+    border: 1px solid #454c6d;
 
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.2s;
 }
 
-.final-cta span {
+.product-select:hover {
+    background: var(--yellow);
+
+    color: var(--navy);
+
+    border-color: var(--yellow);
+}
+
+
+/* =====================================
+   AJUSTES
+===================================== */
+
+.adjust-buttons {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.adjust-buttons button {
+    padding: 10px 15px;
+
+    background: white;
+
+    border: none;
+
+    color: var(--navy);
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.adjust-buttons button:hover {
+    background: var(--yellow);
+}
+
+.adjust-buttons .reset {
+    background: #a8a8a8;
+}
+
+
+/* =====================================
+   PROVADOR
+===================================== */
+
+.try-on-area {
+    min-width: 0;
+}
+
+.try-on-header {
+    margin-bottom: 15px;
 
     color: var(--yellow);
 
     font-weight: bold;
 
-    letter-spacing: 3px;
-
-}
-
-.final-cta h2 {
-
-    font-size: clamp(45px, 7vw, 90px);
-
-    line-height: 0.95;
-
-    margin: 25px 0 35px;
-
+    letter-spacing: 1px;
 }
 
 
+/*
+   Área onde a foto aparece.
+*/
 
-/* =========================================
-   FOOTER
-========================================= */
+.try-on {
+    position: relative;
 
-footer {
+    width: 100%;
 
-    background: #090c1c;
+    min-height: 600px;
 
-    color: #aaa;
+    overflow: hidden;
 
-    padding: 50px 8%;
+    background:
+        linear-gradient(
+            135deg,
+            #eee,
+            #d7d7d7
+        );
+
+    border: 4px solid var(--yellow);
+}
+
+
+/* =====================================
+   MENSAGEM INICIAL
+===================================== */
+
+.empty-message {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 80%;
 
     text-align: center;
 
+    color: #777;
+}
+
+.empty-icon {
+    font-size: 70px;
+
+    margin-bottom: 20px;
+}
+
+.empty-message h3 {
+    color: var(--navy);
+
+    font-size: 25px;
+
+    margin-bottom: 10px;
+}
+
+
+/* =====================================
+   FOTO DO USUÁRIO
+===================================== */
+
+.user-photo {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    display: none;
+}
+
+
+/* =====================================
+   ROUPA
+===================================== */
+
+.clothing-overlay {
+    position: absolute;
+
+    width: 300px;
+
+    max-width: none;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(0deg);
+
+    cursor: grab;
+
+    user-select: none;
+
+    display: none;
+
+    z-index: 10;
+
+    touch-action: none;
+}
+
+.clothing-overlay:active {
+    cursor: grabbing;
+}
+
+
+/* =====================================
+   INFO DO LOOK
+===================================== */
+
+.selected-info {
+    margin-top: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+#selectedProduct {
+    color: white;
+
+    font-weight: bold;
+}
+
+
+/* =====================================
+   COMPRAR
+===================================== */
+
+.buy-button {
+    padding: 15px 25px;
+
+    border: none;
+
+    background: var(--yellow);
+
+    color: var(--navy);
+
+    font-weight: 900;
+
+    cursor: pointer;
+}
+
+.buy-button:disabled {
+    opacity: 0.4;
+
+    cursor: not-allowed;
+}
+
+
+/* =====================================
+   PRODUTOS
+===================================== */
+
+.products-section {
+    background: #f5f3ef;
+}
+
+.product-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+.product-card {
+    background: white;
+
+    overflow: hidden;
+
+    border: 1px solid #ddd;
+
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,0.1);
+}
+
+.product-card img {
+    display: block;
+
+    width: 100%;
+
+    height: 320px;
+
+    object-fit: contain;
+
+    background: #eee;
+}
+
+.product-card-content {
+    padding: 20px;
+}
+
+.product-card h3 {
+    margin-bottom: 10px;
+}
+
+.product-card p {
+    margin-bottom: 15px;
+
+    color: #666;
+}
+
+.choose-product {
+    width: 100%;
+
+    padding: 13px;
+
+    border: none;
+
+    background: var(--navy);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-weight: bold;
+}
+
+.choose-product:hover {
+    background: var(--yellow);
+
+    color: var(--navy);
+}
+
+
+/* =====================================
+   CTA FINAL
+===================================== */
+
+.final-cta {
+    padding: 100px 8%;
+
+    text-align: center;
+
+    background: var(--yellow);
+
+    color: var(--navy);
+}
+
+.final-cta img {
+    width: 140px;
+
+    height: 140px;
+
+    object-fit: contain;
+
+    margin-bottom: 30px;
+}
+
+.final-cta h2 {
+    font-size: clamp(40px, 7vw, 80px);
+
+    line-height: 0.95;
+
+    margin-bottom: 35px;
+}
+
+
+/* =====================================
+   FOOTER
+===================================== */
+
+footer {
+    padding: 50px 8%;
+
+    background: #080b1d;
+
+    color: #aaa;
+
+    text-align: center;
 }
 
 footer img {
-
     width: 90px;
 
     margin-bottom: 20px;
-
 }
 
 footer p {
-
-    margin: 6px;
-
-    font-size: 13px;
-
+    margin: 5px;
 }
 
 
-
-/* =========================================
+/* =====================================
    RESPONSIVO
-========================================= */
+===================================== */
 
 @media (max-width: 900px) {
 
-    .menu {
-
+    .header nav {
         display: none;
-
     }
 
     .hero {
+        min-height: 600px;
 
-        flex-direction: column;
-
-        text-align: center;
-
-        padding-top: 70px;
-
-    }
-
-    .hero-logo {
-
-        width: 260px;
-
+        padding: 70px 6%;
     }
 
     .steps {
-
         grid-template-columns: 1fr;
-
     }
 
-    .closet-grid {
-
+    .closet-layout {
         grid-template-columns: 1fr;
-
     }
 
-    .products-grid {
-
+    .product-grid {
         grid-template-columns:
             repeat(2, 1fr);
+    }
 
+    .try-on {
+        min-height: 550px;
     }
 
 }
-
 
 
 @media (max-width: 600px) {
 
-    section {
-
-        padding: 70px 5%;
-
+    .header {
+        height: 70px;
     }
 
-    .hero {
-
-        padding-left: 5%;
-
-        padding-right: 5%;
-
+    .logo-area img {
+        height: 50px;
     }
 
     .hero h1 {
-
         font-size: 48px;
-
     }
 
-    .products-grid {
+    .hero p {
+        font-size: 17px;
+    }
 
+    .section {
+        padding: 70px 6%;
+    }
+
+    .closet-section {
+        padding: 70px 5%;
+    }
+
+    .product-grid {
         grid-template-columns: 1fr;
-
     }
 
-    .clothing-buttons {
+    .selected-info {
+        flex-direction: column;
 
-        grid-template-columns:
-            repeat(2, 1fr);
-
+        align-items: stretch;
     }
 
-    .tryon {
-
+    .try-on {
         min-height: 500px;
-
     }
 
 }
