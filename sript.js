@@ -1,2 +1,1 @@
-console.log("SCRIPT FSA FUNCIONANDO!");
-alert("JavaScript carregado!");
+alert("JAVASCRIPT FUNCIONANDO!");
