@@ -1,923 +1,571 @@
-/* =====================================
-   RESET
-===================================== */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f5f3ef;
-    color: #0f142e;
-}
+<!DOCTYPE html>
+<html lang="pt-BR">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* =====================================
-   CORES DA ATLÉTICA
-===================================== */
+    <title>Closet Digital | Atlética FSA</title>
 
-:root {
-    --navy: #0f142e;
-    --yellow: #f5c820;
-    --brown: #4b3e26;
-    --purple: #6e637f;
-    --gray: #afaeab;
-    --white: #ffffff;
-}
+    <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
 
-/* =====================================
-   HEADER
-===================================== */
+    <!-- ================= HEADER ================= -->
 
-.header {
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    <header class="header">
 
-    height: 80px;
+        <a href="#inicio" class="logo-area">
+            <img src="assets/logo.png" alt="Atlética FSA">
+        </a>
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+        <nav>
+            <a href="#inicio">INÍCIO</a>
+            <a href="#como-funciona">COMO FUNCIONA</a>
+            <a href="#closet">CLOSET</a>
+            <a href="#roupas">ROUPAS</a>
+        </nav>
 
-    padding: 10px 6%;
+    </header>
 
-    background: var(--navy);
-    border-bottom: 3px solid var(--yellow);
-}
 
-.logo-area {
-    height: 60px;
-}
+    <!-- ================= HERO ================= -->
 
-.logo-area img {
-    height: 60px;
-    width: auto;
-    object-fit: contain;
-}
+    <main>
 
-.header nav {
-    display: flex;
-    gap: 30px;
-}
+        <section class="hero" id="inicio">
 
-.header nav a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 14px;
-    transition: 0.3s;
-}
+            <div class="hero-content">
 
-.header nav a:hover {
-    color: var(--yellow);
-}
+                <span class="tag">CLOSET DIGITAL</span>
 
+                <h1>
+                    MONTE SEU<br>
+                    <span>LOOK FSA.</span>
+                </h1>
 
-/* =====================================
-   HERO
-===================================== */
+                <p>
+                    Coloque sua foto, escolha uma peça e experimente
+                    virtualmente os produtos da Atlética FSA.
+                </p>
 
-.hero {
-    min-height: 700px;
+                <a href="#closet" class="btn-primary">
+                    EXPERIMENTAR AGORA →
+                </a>
 
-    display: flex;
-    align-items: center;
+            </div>
 
-    padding: 80px 8%;
+        </section>
 
-    background:
-        radial-gradient(
-            circle at 80% 30%,
-            #292e55 0%,
-            var(--navy) 45%,
-            #080b1d 100%
-        );
 
-    color: white;
-}
+        <!-- ================= COMO FUNCIONA ================= -->
 
-.hero-content {
-    max-width: 750px;
-}
+        <section class="section" id="como-funciona">
 
-.tag {
-    display: inline-block;
+            <div class="section-title">
 
-    padding: 8px 15px;
+                <span>COMO FUNCIONA</span>
 
-    margin-bottom: 25px;
+                <h2>
+                    É simples.
+                </h2>
 
-    border: 1px solid var(--yellow);
+            </div>
 
-    color: var(--yellow);
 
-    font-size: 13px;
-    font-weight: bold;
-    letter-spacing: 2px;
-}
+            <div class="steps">
 
-.hero h1 {
-    font-size: clamp(50px, 8vw, 100px);
-    line-height: 0.95;
+                <div class="step">
 
-    margin-bottom: 30px;
+                    <strong>01</strong>
 
-    font-weight: 900;
-}
+                    <h3>ENVIE SUA FOTO</h3>
 
-.hero h1 span {
-    color: var(--yellow);
-}
+                    <p>
+                        Adicione uma foto sua. Não precisa ser de corpo inteiro:
+                        pode ser uma foto mostrando a parte do corpo onde você
+                        quer visualizar a peça.
+                    </p>
 
-.hero p {
-    max-width: 600px;
+                </div>
 
-    font-size: 20px;
-    line-height: 1.6;
 
-    margin-bottom: 35px;
+                <div class="step">
 
-    color: #ddd;
-}
+                    <strong>02</strong>
 
+                    <h3>ESCOLHA SUA PEÇA</h3>
 
-/* =====================================
-   BOTÃO
-===================================== */
+                    <p>
+                        Escolha entre as peças disponíveis da Atlética FSA
+                        e coloque a roupa sobre a sua foto.
+                    </p>
 
-.btn-primary {
-    display: inline-block;
+                </div>
 
-    padding: 17px 28px;
 
-    background: var(--yellow);
-    color: var(--navy);
+                <div class="step">
 
-    text-decoration: none;
+                    <strong>03</strong>
 
-    font-weight: 900;
+                    <h3>MONTE SEU LOOK</h3>
 
-    border: none;
+                    <p>
+                        Arraste, aumente, diminua e gire a peça até encontrar
+                        a posição perfeita.
+                    </p>
 
-    transition: 0.3s;
-}
+                </div>
 
-.btn-primary:hover {
-    transform: translateY(-3px);
+            </div>
 
-    box-shadow:
-        0 10px 25px rgba(0,0,0,0.25);
-}
+        </section>
 
 
-/* =====================================
-   SEÇÕES
-===================================== */
+        <!-- ================= CLOSET ================= -->
 
-.section {
-    padding: 100px 8%;
-}
+        <section class="closet-section" id="closet">
 
-.section-title {
-    margin-bottom: 50px;
-}
+            <div class="section-title">
 
-.section-title span {
-    color: var(--brown);
+                <span>PROVADOR VIRTUAL</span>
 
-    font-size: 13px;
+                <h2>
+                    MONTE SEU LOOK.
+                </h2>
 
-    font-weight: bold;
+            </div>
 
-    letter-spacing: 2px;
-}
 
-.section-title h2 {
-    margin-top: 10px;
+            <div class="closet-layout">
 
-    font-size: clamp(38px, 5vw, 65px);
 
-    line-height: 1;
-}
+                <!-- PAINEL -->
 
+                <aside class="controls-panel">
 
-/* =====================================
-   COMO FUNCIONA
-===================================== */
 
-.steps {
-    display: grid;
+                    <!-- FOTO -->
 
-    grid-template-columns:
-        repeat(3, 1fr);
+                    <div class="control-box">
 
-    gap: 25px;
-}
+                        <h3>1. SUA FOTO</h3>
 
-.step {
-    padding: 35px;
+                        <p>
+                            Adicione uma foto da parte do seu corpo
+                            que deseja usar no provador.
+                        </p>
 
-    background: white;
 
-    border-left: 5px solid var(--yellow);
+                        <input
+                            type="file"
+                            id="photoInput"
+                            accept="image/*"
+                            hidden
+                        >
 
-    box-shadow:
-        0 10px 30px rgba(0,0,0,0.06);
-}
 
-.step strong {
-    color: var(--yellow);
+                        <label
+                            for="photoInput"
+                            class="upload-area"
+                            id="uploadArea"
+                        >
 
-    font-size: 45px;
+                            <div class="upload-icon">
+                                📷
+                            </div>
 
-    -webkit-text-stroke: 1px var(--navy);
-}
+                            <strong>
+                                ESCOLHER FOTO
+                            </strong>
 
-.step h3 {
-    margin: 20px 0 15px;
+                            <span>
+                                Clique aqui para selecionar uma imagem
+                            </span>
 
-    font-size: 24px;
-}
+                        </label>
 
-.step p {
-    color: #666;
 
-    line-height: 1.6;
-}
+                        <p
+                            id="photoStatus"
+                            class="photo-status"
+                        >
+                            Nenhuma foto selecionada
+                        </p>
 
+                    </div>
 
-/* =====================================
-   CLOSET
-===================================== */
 
-.closet-section {
-    padding: 100px 6%;
+                    <!-- ROUPAS -->
 
-    background: var(--navy);
+                    <div class="control-box">
 
-    color: white;
-}
+                        <h3>2. ESCOLHA SUA PEÇA</h3>
 
-.closet-section .section-title span {
-    color: var(--yellow);
-}
+                        <p>
+                            Selecione uma peça da Atlética FSA.
+                        </p>
 
-.closet-layout {
-    display: grid;
 
-    grid-template-columns:
-        350px 1fr;
+                        <div class="product-buttons">
 
-    gap: 40px;
+                            <button
+                                type="button"
+                                class="product-select"
+                                onclick="selecionarRoupa('assets/camiseta-azul.png', 'Camiseta Azul')"
+                            >
+                                CAMISETA AZUL
+                            </button>
 
-    max-width: 1400px;
 
-    margin: auto;
-}
+                            <button
+                                type="button"
+                                class="product-select"
+                                onclick="selecionarRoupa('assets/camiseta-branca.png', 'Camiseta Branca')"
+                            >
+                                CAMISETA BRANCA
+                            </button>
 
 
-/* =====================================
-   PAINEL DE CONTROLE
-===================================== */
+                            <button
+                                type="button"
+                                class="product-select"
+                                onclick="selecionarRoupa('assets/moletom-amarelo.png', 'Moletom Amarelo')"
+                            >
+                                MOLETOM AMARELO
+                            </button>
 
-.controls-panel {
-    display: flex;
 
-    flex-direction: column;
+                            <button
+                                type="button"
+                                class="product-select"
+                                onclick="selecionarRoupa('assets/moletom-branco.png', 'Moletom Branco')"
+                            >
+                                MOLETOM BRANCO
+                            </button>
 
-    gap: 20px;
-}
 
-.control-box {
-    padding: 25px;
+                            <button
+                                type="button"
+                                class="product-select"
+                                onclick="selecionarRoupa('assets/moletom-preto.png', 'Moletom Preto')"
+                            >
+                                MOLETOM PRETO
+                            </button>
 
-    background: #181e3b;
 
-    border: 1px solid #303656;
-}
+                            <button
+                                type="button"
+                                class="product-select"
+                                onclick="selecionarRoupa('assets/jaqueta-varsity.png', 'Jaqueta Varsity')"
+                            >
+                                JAQUETA VARSITY
+                            </button>
 
-.control-box h3 {
-    margin-bottom: 10px;
+                        </div>
 
-    color: var(--yellow);
-}
+                    </div>
 
-.control-box p {
-    margin-bottom: 18px;
 
-    color: #bbb;
+                    <!-- AJUSTES -->
 
-    line-height: 1.5;
-}
+                    <div class="control-box">
 
+                        <h3>3. AJUSTE A PEÇA</h3>
 
-/* =====================================
-   INPUT DE FOTO
-===================================== */
+                        <p>
+                            Arraste a peça diretamente na foto.
+                        </p>
 
-/*
-   O input fica disponível para o navegador,
-   mas invisível visualmente.
-*/
 
-#photoInput {
-    position: absolute;
+                        <div class="adjust-buttons">
 
-    width: 1px;
-    height: 1px;
+                            <button
+                                type="button"
+                                onclick="diminuirRoupa()"
+                            >
+                                −
+                            </button>
 
-    opacity: 0;
 
-    overflow: hidden;
+                            <button
+                                type="button"
+                                onclick="aumentarRoupa()"
+                            >
+                                +
+                            </button>
 
-    pointer-events: none;
-}
 
+                            <button
+                                type="button"
+                                onclick="girarRoupa()"
+                            >
+                                ↻
+                            </button>
 
-/*
-   Esse é o botão que abre
-   a janela para escolher a foto.
-*/
 
-.upload-button {
-    display: block;
+                            <button
+                                type="button"
+                                class="reset"
+                                onclick="resetarRoupa()"
+                            >
+                                RESETAR
+                            </button>
 
-    width: 100%;
+                        </div>
 
-    padding: 15px;
+                    </div>
 
-    background: var(--yellow);
+                </aside>
 
-    color: var(--navy);
 
-    text-align: center;
+                <!-- PROVADOR -->
 
-    font-weight: bold;
+                <div class="try-on-area">
 
-    cursor: pointer;
+                    <div class="try-on-header">
+                        SEU PROVADOR
+                    </div>
 
-    border-radius: 3px;
 
-    transition: 0.2s;
-}
+                    <div
+                        class="try-on"
+                        id="viewer"
+                    >
 
-.upload-button:hover {
-    transform: translateY(-2px);
+                        <div
+                            class="empty-message"
+                            id="viewerMessage"
+                        >
 
-    background: #ffd83d;
-}
+                            <div class="empty-icon">
+                                👕
+                            </div>
 
-.status {
-    margin-top: 12px;
+                            <h3>
+                                Seu look aparecerá aqui
+                            </h3>
 
-    font-size: 13px;
-}
+                            <p>
+                                Primeiro escolha uma foto.
+                            </p>
 
+                        </div>
 
-/* =====================================
-   BOTÕES DAS ROUPAS
-===================================== */
 
-.product-buttons {
-    display: grid;
+                        <img
+                            id="userPhoto"
+                            class="user-photo"
+                            alt="Sua foto"
+                        >
 
-    grid-template-columns:
-        repeat(2, 1fr);
 
-    gap: 10px;
-}
+                        <img
+                            id="clothingOverlay"
+                            class="clothing-overlay"
+                            alt="Roupa selecionada"
+                            draggable="false"
+                        >
 
-.product-select {
-    padding: 10px;
+                    </div>
 
-    background: #272d4a;
 
-    color: white;
+                    <div class="selected-info">
 
-    border: 1px solid #454c6d;
+                        <div>
 
-    cursor: pointer;
+                            <span class="selected-label">
+                                PEÇA SELECIONADA
+                            </span>
 
-    font-weight: bold;
+                            <div id="selectedProduct">
+                                Nenhuma peça selecionada
+                            </div>
 
-    transition: 0.2s;
-}
+                        </div>
 
-.product-select:hover {
-    background: var(--yellow);
 
-    color: var(--navy);
+                        <button
+                            type="button"
+                            class="buy-button"
+                            id="buyButton"
+                            onclick="comprarLook()"
+                            disabled
+                        >
+                            QUERO ESSE LOOK →
+                        </button>
 
-    border-color: var(--yellow);
-}
+                    </div>
 
+                </div>
 
-/* =====================================
-   AJUSTES
-===================================== */
+            </div>
 
-.adjust-buttons {
-    display: flex;
+        </section>
 
-    flex-wrap: wrap;
 
-    gap: 8px;
-}
+        <!-- ================= ROUPAS ================= -->
 
-.adjust-buttons button {
-    padding: 10px 15px;
+        <section
+            class="section products-section"
+            id="roupas"
+        >
 
-    background: white;
+            <div class="section-title">
 
-    border: none;
+                <span>COLEÇÃO FSA</span>
 
-    color: var(--navy);
+                <h2>
+                    NOSSAS PEÇAS.
+                </h2>
 
-    cursor: pointer;
+            </div>
 
-    font-weight: bold;
-}
 
-.adjust-buttons button:hover {
-    background: var(--yellow);
-}
+            <div class="product-grid">
 
-.adjust-buttons .reset {
-    background: #a8a8a8;
-}
 
+                <div class="product-card">
 
-/* =====================================
-   PROVADOR
-===================================== */
+                    <img
+                        src="assets/camiseta-azul.png"
+                        alt="Camiseta Azul"
+                    >
 
-.try-on-area {
-    min-width: 0;
-}
+                    <div class="product-card-content">
 
-.try-on-header {
-    margin-bottom: 15px;
+                        <h3>
+                            Camiseta Azul
+                        </h3>
 
-    color: var(--yellow);
+                        <p>
+                            Modelo oficial da Atlética FSA.
+                        </p>
 
-    font-weight: bold;
+                        <button
+                            type="button"
+                            class="choose-product"
+                            onclick="selecionarRoupa('assets/camiseta-azul.png', 'Camiseta Azul'); irParaCloset();"
+                        >
+                            EXPERIMENTAR
+                        </button>
 
-    letter-spacing: 1px;
-}
+                    </div>
 
+                </div>
 
-/*
-   Área onde a foto aparece.
-*/
 
-.try-on {
-    position: relative;
+                <div class="product-card">
 
-    width: 100%;
+                    <img
+                        src="assets/camiseta-branca.png"
+                        alt="Camiseta Branca"
+                    >
 
-    min-height: 600px;
+                    <div class="product-card-content">
 
-    overflow: hidden;
+                        <h3>
+                            Camiseta Branca
+                        </h3>
 
-    background:
-        linear-gradient(
-            135deg,
-            #eee,
-            #d7d7d7
-        );
+                        <p>
+                            Modelo oficial da Atlética FSA.
+                        </p>
 
-    border: 4px solid var(--yellow);
-}
+                        <button
+                            type="button"
+                            class="choose-product"
+                            onclick="selecionarRoupa('assets/camiseta-branca.png', 'Camiseta Branca'); irParaCloset();"
+                        >
+                            EXPERIMENTAR
+                        </button>
 
+                    </div>
 
-/* =====================================
-   MENSAGEM INICIAL
-===================================== */
+                </div>
 
-.empty-message {
-    position: absolute;
 
-    top: 50%;
-    left: 50%;
+                <div class="product-card">
 
-    transform: translate(-50%, -50%);
+                    <img
+                        src="assets/moletom-preto.png"
+                        alt="Moletom Preto"
+                    >
 
-    width: 80%;
+                    <div class="product-card-content">
 
-    text-align: center;
+                        <h3>
+                            Moletom Preto
+                        </h3>
 
-    color: #777;
-}
+                        <p>
+                            Modelo oficial da Atlética FSA.
+                        </p>
 
-.empty-icon {
-    font-size: 70px;
+                        <button
+                            type="button"
+                            class="choose-product"
+                            onclick="selecionarRoupa('assets/moletom-preto.png', 'Moletom Preto'); irParaCloset();"
+                        >
+                            EXPERIMENTAR
+                        </button>
 
-    margin-bottom: 20px;
-}
+                    </div>
 
-.empty-message h3 {
-    color: var(--navy);
+                </div>
 
-    font-size: 25px;
 
-    margin-bottom: 10px;
-}
+            </div>
 
+        </section>
 
-/* =====================================
-   FOTO DO USUÁRIO
-===================================== */
 
-.user-photo {
-    position: absolute;
+        <!-- ================= CTA ================= -->
 
-    inset: 0;
+        <section class="final-cta">
 
-    width: 100%;
-    height: 100%;
+            <img
+                src="assets/logo.png"
+                alt="Atlética FSA"
+            >
 
-    object-fit: contain;
+            <h2>
+                VISTA<br>
+                A FSA.
+            </h2>
 
-    display: none;
-}
+            <a
+                href="#closet"
+                class="btn-primary"
+            >
+                MONTAR MEU LOOK →
+            </a>
 
+        </section>
 
-/* =====================================
-   ROUPA
-===================================== */
+    </main>
 
-.clothing-overlay {
-    position: absolute;
 
-    width: 300px;
+    <!-- ================= FOOTER ================= -->
 
-    max-width: none;
+    <footer>
 
-    left: 50%;
-    top: 50%;
+        <img
+            src="assets/logo.png"
+            alt="Atlética FSA"
+        >
 
-    transform:
-        translate(-50%, -50%)
-        rotate(0deg);
+        <p>
+            ASSOCIAÇÃO ATLÉTICA ACADÊMICA
+            • CLOSET DIGITAL • 2026
+        </p>
 
-    cursor: grab;
+    </footer>
 
-    user-select: none;
 
-    display: none;
+    <script src="script.js"></script>
 
-    z-index: 10;
+</body>
 
-    touch-action: none;
-}
-
-.clothing-overlay:active {
-    cursor: grabbing;
-}
-
-
-/* =====================================
-   INFO DO LOOK
-===================================== */
-
-.selected-info {
-    margin-top: 20px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-}
-
-#selectedProduct {
-    color: white;
-
-    font-weight: bold;
-}
-
-
-/* =====================================
-   COMPRAR
-===================================== */
-
-.buy-button {
-    padding: 15px 25px;
-
-    border: none;
-
-    background: var(--yellow);
-
-    color: var(--navy);
-
-    font-weight: 900;
-
-    cursor: pointer;
-}
-
-.buy-button:disabled {
-    opacity: 0.4;
-
-    cursor: not-allowed;
-}
-
-
-/* =====================================
-   PRODUTOS
-===================================== */
-
-.products-section {
-    background: #f5f3ef;
-}
-
-.product-grid {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 25px;
-}
-
-.product-card {
-    background: white;
-
-    overflow: hidden;
-
-    border: 1px solid #ddd;
-
-    transition: 0.3s;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-
-    box-shadow:
-        0 15px 30px rgba(0,0,0,0.1);
-}
-
-.product-card img {
-    display: block;
-
-    width: 100%;
-
-    height: 320px;
-
-    object-fit: contain;
-
-    background: #eee;
-}
-
-.product-card-content {
-    padding: 20px;
-}
-
-.product-card h3 {
-    margin-bottom: 10px;
-}
-
-.product-card p {
-    margin-bottom: 15px;
-
-    color: #666;
-}
-
-.choose-product {
-    width: 100%;
-
-    padding: 13px;
-
-    border: none;
-
-    background: var(--navy);
-
-    color: white;
-
-    cursor: pointer;
-
-    font-weight: bold;
-}
-
-.choose-product:hover {
-    background: var(--yellow);
-
-    color: var(--navy);
-}
-
-
-/* =====================================
-   CTA FINAL
-===================================== */
-
-.final-cta {
-    padding: 100px 8%;
-
-    text-align: center;
-
-    background: var(--yellow);
-
-    color: var(--navy);
-}
-
-.final-cta img {
-    width: 140px;
-
-    height: 140px;
-
-    object-fit: contain;
-
-    margin-bottom: 30px;
-}
-
-.final-cta h2 {
-    font-size: clamp(40px, 7vw, 80px);
-
-    line-height: 0.95;
-
-    margin-bottom: 35px;
-}
-
-
-/* =====================================
-   FOOTER
-===================================== */
-
-footer {
-    padding: 50px 8%;
-
-    background: #080b1d;
-
-    color: #aaa;
-
-    text-align: center;
-}
-
-footer img {
-    width: 90px;
-
-    margin-bottom: 20px;
-}
-
-footer p {
-    margin: 5px;
-}
-
-
-/* =====================================
-   RESPONSIVO
-===================================== */
-
-@media (max-width: 900px) {
-
-    .header nav {
-        display: none;
-    }
-
-    .hero {
-        min-height: 600px;
-
-        padding: 70px 6%;
-    }
-
-    .steps {
-        grid-template-columns: 1fr;
-    }
-
-    .closet-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .product-grid {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .try-on {
-        min-height: 550px;
-    }
-
-}
-
-
-@media (max-width: 600px) {
-
-    .header {
-        height: 70px;
-    }
-
-    .logo-area img {
-        height: 50px;
-    }
-
-    .hero h1 {
-        font-size: 48px;
-    }
-
-    .hero p {
-        font-size: 17px;
-    }
-
-    .section {
-        padding: 70px 6%;
-    }
-
-    .closet-section {
-        padding: 70px 5%;
-    }
-
-    .product-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .selected-info {
-        flex-direction: column;
-
-        align-items: stretch;
-    }
-
-    .try-on {
-        min-height: 500px;
-    }
-
-}
-/* =====================================
-   ÁREA DE UPLOAD DA FOTO
-===================================== */
-
-.upload-area {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-    min-height: 120px;
-
-    padding: 20px;
-
-    background: var(--yellow);
-    color: var(--navy);
-
-    text-align: center;
-
-    font-weight: bold;
-
-    cursor: pointer;
-
-    border-radius: 3px;
-
-    transition: 0.2s;
-
-    position: relative;
-    z-index: 20;
-}
-
-.upload-area:hover {
-    transform: translateY(-2px);
-    background: #ffd83d;
-}
-
-.upload-area:active {
-    transform: translateY(0);
-}
-
-.upload-area .upload-icon {
-    font-size: 35px;
-    margin-bottom: 8px;
-}
-
-.upload-area strong {
-    display: block;
-    font-size: 16px;
-}
-
-.upload-area span {
-    display: block;
-    margin-top: 6px;
-
-    font-size: 12px;
-    font-weight: normal;
-    opacity: 0.75;
-}
-
-
-/* STATUS DA FOTO */
-
-.photo-status {
-    margin-top: 12px;
-
-    font-size: 13px;
-
-    color: #bbb;
-}
+</html>
