@@ -1,79 +1,10 @@
- function carregarFoto(input) {
+document.addEventListener("DOMContentLoaded", function () {
 
-    console.log("🔥 CARREGAR FOTO FOI CHAMADA");
+    console.log("CLOSET DIGITAL INICIADO");
 
-    const arquivo = input.files && input.files[0];
-
-    if (!arquivo) {
-        console.log("Nenhum arquivo selecionado.");
-        return;
-    }
-
-    console.log("Arquivo:", arquivo.name);
-    console.log("Tipo:", arquivo.type);
-    console.log("Tamanho:", arquivo.size);
-
-    if (!arquivo.type.startsWith("image/")) {
-        alert("Por favor, escolha uma foto JPG, PNG ou WEBP.");
-        return;
-    }
-
-    const userPhoto = document.getElementById("userPhoto");
-    const viewerMessage = document.getElementById("viewerMessage");
-    const photoStatus = document.getElementById("photoStatus");
-
-    if (!userPhoto) {
-        console.error("ERRO: userPhoto não encontrado.");
-        return;
-    }
-
-    console.log("Elemento da foto encontrado!");
-
-    const leitor = new FileReader();
-
-    leitor.onload = function(evento) {
-
-        console.log("🔥 FILE READER CARREGOU A FOTO");
-
-        userPhoto.onload = function() {
-
-            console.log("🔥 FOTO APARECEU NO NAVEGADOR!");
-
-            userPhoto.style.display = "block";
-            userPhoto.style.visibility = "visible";
-            userPhoto.style.opacity = "1";
-
-            if (viewerMessage) {
-                viewerMessage.style.display = "none";
-            }
-
-            if (photoStatus) {
-                photoStatus.textContent =
-                    "✓ FOTO CARREGADA COM SUCESSO";
-            }
-        };
-
-        userPhoto.onerror = function() {
-
-            console.error("❌ O navegador não conseguiu mostrar a imagem.");
-
-            alert(
-                "Não consegui abrir essa foto.\n\n" +
-                "Escolha uma imagem JPG ou PNG."
-            );
-        };
-
-        userPhoto.src = evento.target.result;
-    };
-
-    leitor.onerror = function() {
-        console.error("❌ ERRO NO FILEREADER");
-        alert("Não consegui ler essa foto.");
-    };
-
-    leitor.readAsDataURL(arquivo);
-}
-document.addEventListener("DOMContentLoaded", () => {
+    /* =========================
+       ELEMENTOS
+    ========================= */
 
     const photoInput = document.getElementById("photoInput");
     const userPhoto = document.getElementById("userPhoto");
@@ -82,6 +13,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const viewerMessage = document.getElementById("viewerMessage");
     const selectedProduct = document.getElementById("selectedProduct");
     const buyButton = document.getElementById("buyButton");
+
+    if (!photoInput) {
+        console.error("ERRO: photoInput não encontrado");
+        return;
+    }
+
+    if (!userPhoto) {
+        console.error("ERRO: userPhoto não encontrado");
+        return;
+    }
+
+    console.log("Elementos encontrados corretamente");
+
+
+    /* =========================
+       VARIÁVEIS DA ROUPA
+    ========================= */
 
     let escala = 1;
     let rotacao = 0;
@@ -98,26 +46,205 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================
+       FOTO
+    ========================= */
+
+    function carregarFoto() {
+
+        console.log("================================");
+        console.log("FOTO SELECIONADA");
+        console.log("================================");
+
+        const arquivo = photoInput.files[0];
+
+        if (!arquivo) {
+            console.log("Nenhum arquivo encontrado");
+            return;
+        }
+
+        console.log("Nome:", arquivo.name);
+        console.log("Tipo:", arquivo.type);
+        console.log("Tamanho:", arquivo.size);
+
+
+        /* Atualiza a interface imediatamente */
+
+        if (photoStatus) {
+            photoStatus.textContent = "CARREGANDO FOTO...";
+        }
+
+
+        /* Verifica se é imagem */
+
+        if (!arquivo.type || !arquivo.type.startsWith("image/")) {
+
+            console.error("Arquivo não é uma imagem");
+
+            if (photoStatus) {
+                photoStatus.textContent = "Formato de foto não suportado";
+            }
+
+            alert(
+                "Escolha uma foto JPG, PNG ou WEBP."
+            );
+
+            return;
+        }
+
+
+        /* Cria URL temporária */
+
+        const url = URL.createObjectURL(arquivo);
+
+        console.log("URL criada:", url);
+
+
+        /* Limpa eventos anteriores */
+
+        userPhoto.onload = null;
+        userPhoto.onerror = null;
+
+
+        /* Quando a imagem carregar */
+
+        userPhoto.onload = function () {
+
+            console.log("================================");
+            console.log("FOTO CARREGOU COM SUCESSO!");
+            console.log(
+                "Dimensões:",
+                userPhoto.naturalWidth,
+                "x",
+                userPhoto.naturalHeight
+            );
+            console.log("================================");
+
+
+            userPhoto.style.display = "block";
+            userPhoto.style.visibility = "visible";
+            userPhoto.style.opacity = "1";
+
+
+            if (viewerMessage) {
+                viewerMessage.style.display = "none";
+            }
+
+
+            if (photoStatus) {
+                photoStatus.textContent =
+                    "✓ FOTO CARREGADA COM SUCESSO";
+            }
+
+
+            URL.revokeObjectURL(url);
+        };
+
+
+        /* Erro */
+
+        userPhoto.onerror = function () {
+
+            console.error(
+                "ERRO: navegador não conseguiu abrir a imagem"
+            );
+
+            if (photoStatus) {
+                photoStatus.textContent =
+                    "ERRO AO CARREGAR FOTO";
+            }
+
+            alert(
+                "Não consegui abrir essa foto.\n\n" +
+                "Tente uma foto JPG ou PNG."
+            );
+
+            URL.revokeObjectURL(url);
+        };
+
+
+        /* Mostra a imagem */
+
+        userPhoto.src = url;
+
+        console.log("SRC DA FOTO DEFINIDO");
+    }
+
+
+    /* =========================
+       EVENTOS DO INPUT
+    ========================= */
+
+    photoInput.addEventListener(
+        "change",
+        carregarFoto
+    );
+
+    photoInput.addEventListener(
+        "input",
+        carregarFoto
+    );
+
+
+    /* =========================
+       GARANTE QUE O INPUT
+       POSSA SER USADO NOVAMENTE
+    ========================= */
+
+    const uploadArea =
+        document.getElementById("uploadArea");
+
+    if (uploadArea) {
+
+        uploadArea.addEventListener(
+            "click",
+            function () {
+
+                console.log(
+                    "Botão ESCOLHER FOTO clicado"
+                );
+
+                /*
+                Limpa o valor anterior.
+                Isso permite escolher a mesma
+                foto novamente no iPhone.
+                */
+
+                photoInput.value = "";
+            }
+        );
+    }
+
+
+    /* =========================
        ESCOLHER ROUPA
     ========================= */
 
-    window.selecionarRoupa = function (caminho, nome) {
+    window.selecionarRoupa = function (
+        caminho,
+        nome
+    ) {
 
         if (
             !userPhoto.src ||
             userPhoto.style.display !== "block"
         ) {
 
-            alert("Primeiro escolha uma foto sua.");
+            alert(
+                "Primeiro escolha uma foto sua."
+            );
 
-            document
-                .getElementById("closet")
-                .scrollIntoView({
+            const closet =
+                document.getElementById("closet");
+
+            if (closet) {
+                closet.scrollIntoView({
                     behavior: "smooth"
                 });
+            }
 
             return;
         }
+
 
         roupaAtual = nome;
 
@@ -126,28 +253,43 @@ document.addEventListener("DOMContentLoaded", () => {
         posicaoX = 0;
         posicaoY = 0;
 
+
         clothingOverlay.onload = function () {
 
-            console.log("Roupa carregada:", nome);
+            console.log(
+                "Roupa carregada:",
+                nome
+            );
 
-            clothingOverlay.style.display = "block";
+            clothingOverlay.style.display =
+                "block";
 
             atualizarRoupa();
         };
 
+
         clothingOverlay.onerror = function () {
 
+            console.error(
+                "Erro ao carregar roupa:",
+                caminho
+            );
+
             alert(
-                "Não consegui carregar esta peça.\n\n" +
-                "Confira se a imagem está dentro da pasta assets."
+                "Não consegui carregar esta peça."
             );
         };
 
+
         clothingOverlay.src = caminho;
 
-        selectedProduct.textContent = nome;
+        if (selectedProduct) {
+            selectedProduct.textContent = nome;
+        }
 
-        buyButton.disabled = false;
+        if (buyButton) {
+            buyButton.disabled = false;
+        }
     };
 
 
@@ -157,7 +299,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function atualizarRoupa() {
 
-        const tamanho = 300 * escala;
+        const tamanho =
+            300 * escala;
 
         clothingOverlay.style.width =
             tamanho + "px";
@@ -174,14 +317,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================
-       AUMENTAR ROUPA
+       AUMENTAR
     ========================= */
 
     window.aumentarRoupa = function () {
 
-        if (!roupaAtual) {
-            return;
-        }
+        if (!roupaAtual) return;
 
         escala += 0.1;
 
@@ -194,14 +335,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================
-       DIMINUIR ROUPA
+       DIMINUIR
     ========================= */
 
     window.diminuirRoupa = function () {
 
-        if (!roupaAtual) {
-            return;
-        }
+        if (!roupaAtual) return;
 
         escala -= 0.1;
 
@@ -214,14 +353,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================
-       GIRAR ROUPA
+       GIRAR
     ========================= */
 
     window.girarRoupa = function () {
 
-        if (!roupaAtual) {
-            return;
-        }
+        if (!roupaAtual) return;
 
         rotacao += 15;
 
@@ -230,14 +367,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================
-       RESETAR ROUPA
+       RESETAR
     ========================= */
 
     window.resetarRoupa = function () {
 
-        if (!roupaAtual) {
-            return;
-        }
+        if (!roupaAtual) return;
 
         escala = 1;
         rotacao = 0;
@@ -249,16 +384,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     /* =========================
-       ARRASTAR ROUPA
+       ARRASTAR
     ========================= */
 
     clothingOverlay.addEventListener(
         "pointerdown",
         function (evento) {
 
-            if (!roupaAtual) {
-                return;
-            }
+            if (!roupaAtual) return;
 
             arrastando = true;
 
@@ -272,7 +405,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 evento.pointerId
             );
 
-            clothingOverlay.style.cursor = "grabbing";
+            clothingOverlay.style.cursor =
+                "grabbing";
         }
     );
 
@@ -281,9 +415,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "pointermove",
         function (evento) {
 
-            if (!arrastando) {
-                return;
-            }
+            if (!arrastando) return;
 
             const movimentoX =
                 evento.clientX - inicioX;
@@ -308,11 +440,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
             arrastando = false;
 
-            clothingOverlay.releasePointerCapture(
-                evento.pointerId
-            );
+            if (
+                clothingOverlay.hasPointerCapture(
+                    evento.pointerId
+                )
+            ) {
+                clothingOverlay.releasePointerCapture(
+                    evento.pointerId
+                );
+            }
 
-            clothingOverlay.style.cursor = "grab";
+            clothingOverlay.style.cursor =
+                "grab";
         }
     );
 
@@ -323,22 +462,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
             arrastando = false;
 
-            clothingOverlay.style.cursor = "grab";
+            clothingOverlay.style.cursor =
+                "grab";
         }
     );
 
 
     /* =========================
-       IR PARA O CLOSET
+       IR PARA CLOSET
     ========================= */
 
     window.irParaCloset = function () {
 
-        document
-            .getElementById("closet")
-            .scrollIntoView({
+        const closet =
+            document.getElementById("closet");
+
+        if (closet) {
+
+            closet.scrollIntoView({
                 behavior: "smooth"
             });
+        }
     };
 
 
@@ -350,7 +494,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!roupaAtual) {
 
-            alert("Escolha uma peça primeiro.");
+            alert(
+                "Escolha uma peça primeiro."
+            );
 
             return;
         }
@@ -365,6 +511,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
 
-    console.log("CLOSET DIGITAL — JavaScript carregado!");
+    console.log(
+        "CLOSET DIGITAL — JavaScript carregado!"
+    );
 
 });
