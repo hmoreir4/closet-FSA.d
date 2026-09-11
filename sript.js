@@ -21,63 +21,69 @@ document.addEventListener("DOMContentLoaded", () => {
     let inicioPosicaoX = 0;
     let inicioPosicaoY = 0;
 
+/* =========================
+   ESCOLHER FOTO
+========================= */
 
-    /* =========================
-       ESCOLHER FOTO
-    ========================= */
+photoInput.addEventListener("change", function () {
 
-    photoInput.addEventListener("change", function () {
+    console.log("1 — CHANGE DISPAROU");
 
-        const arquivo = this.files[0];
+    const arquivo = this.files[0];
 
-        if (!arquivo) {
-            return;
-        }
+    if (!arquivo) {
+        console.log("2 — Nenhum arquivo");
+        return;
+    }
 
-        console.log("Foto escolhida:", arquivo.name);
-        console.log("Tipo da imagem:", arquivo.type);
+    console.log("3 — Arquivo:", arquivo.name);
+    console.log("4 — Tipo:", arquivo.type);
+    console.log("5 — Tamanho:", arquivo.size);
 
-        if (!arquivo.type.startsWith("image/")) {
-            alert("Escolha uma imagem válida.");
-            return;
-        }
+    if (!arquivo.type.startsWith("image/")) {
+        alert("Escolha uma imagem JPG, PNG ou WEBP.");
+        return;
+    }
 
-        /*
-        Cria uma URL temporária para a imagem.
-        Isso funciona melhor no celular do que depender
-        apenas do FileReader.
-        */
+    const url = URL.createObjectURL(arquivo);
 
-        const url = URL.createObjectURL(arquivo);
+    console.log("6 — URL criada:", url);
 
-        userPhoto.onload = function () {
+    userPhoto.onload = function () {
 
-            console.log("FOTO CARREGADA COM SUCESSO!");
+        console.log("7 — IMAGEM CARREGOU!");
+        console.log(
+            "Dimensões:",
+            userPhoto.naturalWidth,
+            "x",
+            userPhoto.naturalHeight
+        );
 
-            userPhoto.style.display = "block";
-            viewerMessage.style.display = "none";
+        userPhoto.style.display = "block";
+        viewerMessage.style.display = "none";
 
-            photoStatus.textContent =
-                "✓ FOTO CARREGADA COM SUCESSO";
+        photoStatus.textContent =
+            "✓ FOTO CARREGADA COM SUCESSO";
 
-            URL.revokeObjectURL(url);
-        };
+        URL.revokeObjectURL(url);
+    };
 
-        userPhoto.onerror = function () {
+    userPhoto.onerror = function () {
 
-            console.error("Não foi possível carregar a imagem.");
+        console.error("7 — ERRO AO DECODIFICAR A IMAGEM");
 
-            alert(
-                "Não consegui abrir essa foto.\n\n" +
-                "Tente escolher uma foto em JPG ou PNG."
-            );
+        alert(
+            "O navegador não conseguiu abrir essa imagem.\n\n" +
+            "Teste com uma foto JPG ou PNG."
+        );
 
-            URL.revokeObjectURL(url);
-        };
+        URL.revokeObjectURL(url);
+    };
 
-        userPhoto.src = url;
-    });
+    userPhoto.src = url;
 
+    console.log("7 — src aplicado");
+});
 
     /* =========================
        ESCOLHER ROUPA
