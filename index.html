@@ -234,21 +234,22 @@
                             </span>
 
                         </label>
+<label for="photoInput" class="upload-area" id="uploadArea">
+    <div class="upload-icon">+</div>
+    <strong>ESCOLHER FOTO</strong>
+    <span>Clique para selecionar</span>
+</label>
 
-                        <input
+<input
     type="file"
     id="photoInput"
     accept="image/jpeg,image/png,image/webp"
-    onchange="carregarFoto(this)"
     hidden
 >
 
-                        <p
-                            id="photoStatus"
-                            class="photo-status"
-                        >
-                            Nenhuma foto selecionada
-                        </p>
+<p id="photoStatus" class="photo-status">
+    Nenhuma foto selecionada
+</p>
 
                     </div>
 
@@ -452,29 +453,38 @@
                     </div>
 
 
-                    <div
-                        class="try-on"
-                        id="viewer"
-                    >
+                   <div class="try-on" id="viewer">
 
-                        <div
-                            class="empty-message"
-                            id="viewerMessage"
-                        >
+    <div class="empty-message" id="viewerMessage">
 
-                            <div class="empty-icon">
-                                👕
-                            </div>
+        <div class="empty-icon">
+            👕
+        </div>
 
-                            <h3>
-                                SEU LOOK APARECERÁ AQUI
-                            </h3>
+        <h3>
+            SEU LOOK APARECERÁ AQUI
+        </h3>
 
-                            <p>
-                                Escolha uma foto para começar.
-                            </p>
+        <p>
+            Escolha uma foto e depois selecione uma peça.
+        </p>
 
-                        </div>
+    </div>
+
+    <img
+        id="userPhoto"
+        class="user-photo"
+        alt="Sua foto"
+    >
+
+    <img
+        id="clothingOverlay"
+        class="clothing-overlay"
+        alt="Roupa selecionada"
+        draggable="false"
+    >
+
+</div>
 
 
                         <img
