@@ -236,11 +236,12 @@
                         </label>
 
                         <input
-                            type="file"
-                            id="photoInput"
-                            accept="image/*"
-                            hidden
-                        >
+    type="file"
+    id="photoInput"
+    accept="image/jpeg,image/png,image/webp"
+    onchange="carregarFoto(this)"
+    hidden
+>
 
                         <p
                             id="photoStatus"
