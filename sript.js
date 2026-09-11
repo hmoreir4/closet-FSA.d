@@ -1,3 +1,78 @@
+ function carregarFoto(input) {
+
+    console.log("🔥 CARREGAR FOTO FOI CHAMADA");
+
+    const arquivo = input.files && input.files[0];
+
+    if (!arquivo) {
+        console.log("Nenhum arquivo selecionado.");
+        return;
+    }
+
+    console.log("Arquivo:", arquivo.name);
+    console.log("Tipo:", arquivo.type);
+    console.log("Tamanho:", arquivo.size);
+
+    if (!arquivo.type.startsWith("image/")) {
+        alert("Por favor, escolha uma foto JPG, PNG ou WEBP.");
+        return;
+    }
+
+    const userPhoto = document.getElementById("userPhoto");
+    const viewerMessage = document.getElementById("viewerMessage");
+    const photoStatus = document.getElementById("photoStatus");
+
+    if (!userPhoto) {
+        console.error("ERRO: userPhoto não encontrado.");
+        return;
+    }
+
+    console.log("Elemento da foto encontrado!");
+
+    const leitor = new FileReader();
+
+    leitor.onload = function(evento) {
+
+        console.log("🔥 FILE READER CARREGOU A FOTO");
+
+        userPhoto.onload = function() {
+
+            console.log("🔥 FOTO APARECEU NO NAVEGADOR!");
+
+            userPhoto.style.display = "block";
+            userPhoto.style.visibility = "visible";
+            userPhoto.style.opacity = "1";
+
+            if (viewerMessage) {
+                viewerMessage.style.display = "none";
+            }
+
+            if (photoStatus) {
+                photoStatus.textContent =
+                    "✓ FOTO CARREGADA COM SUCESSO";
+            }
+        };
+
+        userPhoto.onerror = function() {
+
+            console.error("❌ O navegador não conseguiu mostrar a imagem.");
+
+            alert(
+                "Não consegui abrir essa foto.\n\n" +
+                "Escolha uma imagem JPG ou PNG."
+            );
+        };
+
+        userPhoto.src = evento.target.result;
+    };
+
+    leitor.onerror = function() {
+        console.error("❌ ERRO NO FILEREADER");
+        alert("Não consegui ler essa foto.");
+    };
+
+    leitor.readAsDataURL(arquivo);
+}
 document.addEventListener("DOMContentLoaded", () => {
 
     const photoInput = document.getElementById("photoInput");
@@ -21,69 +96,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let inicioPosicaoX = 0;
     let inicioPosicaoY = 0;
 
-/* =========================
-   ESCOLHER FOTO
-========================= */
-
-photoInput.addEventListener("change", function () {
-
-    console.log("1 — CHANGE DISPAROU");
-
-    const arquivo = this.files[0];
-
-    if (!arquivo) {
-        console.log("2 — Nenhum arquivo");
-        return;
-    }
-
-    console.log("3 — Arquivo:", arquivo.name);
-    console.log("4 — Tipo:", arquivo.type);
-    console.log("5 — Tamanho:", arquivo.size);
-
-    if (!arquivo.type.startsWith("image/")) {
-        alert("Escolha uma imagem JPG, PNG ou WEBP.");
-        return;
-    }
-
-    const url = URL.createObjectURL(arquivo);
-
-    console.log("6 — URL criada:", url);
-
-    userPhoto.onload = function () {
-
-        console.log("7 — IMAGEM CARREGOU!");
-        console.log(
-            "Dimensões:",
-            userPhoto.naturalWidth,
-            "x",
-            userPhoto.naturalHeight
-        );
-
-        userPhoto.style.display = "block";
-        viewerMessage.style.display = "none";
-
-        photoStatus.textContent =
-            "✓ FOTO CARREGADA COM SUCESSO";
-
-        URL.revokeObjectURL(url);
-    };
-
-    userPhoto.onerror = function () {
-
-        console.error("7 — ERRO AO DECODIFICAR A IMAGEM");
-
-        alert(
-            "O navegador não conseguiu abrir essa imagem.\n\n" +
-            "Teste com uma foto JPG ou PNG."
-        );
-
-        URL.revokeObjectURL(url);
-    };
-
-    userPhoto.src = url;
-
-    console.log("7 — src aplicado");
-});
 
     /* =========================
        ESCOLHER ROUPA
